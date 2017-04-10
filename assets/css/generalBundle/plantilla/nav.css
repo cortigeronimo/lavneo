@@ -1,0 +1,54 @@
+nav{
+	float: left;
+	width: 100%;
+	padding: 15px 50px;
+	z-index: 2;
+	transition: all 0.5s ease-in-out;
+	position: fixed;
+}
+
+.efecto{
+	background: #394854;
+	transition-duration: 0.5s;
+	color: white;
+}
+
+nav ul{
+	float: left;
+	width: 70%;
+	list-style: none;
+	text-align: right;
+	padding: 5px 0;
+	/*background: #005c9c;*/
+}
+
+nav ul li{
+	display: inline-block;
+
+}
+
+nav ul li a{
+	text-decoration: none;
+	color: white;
+	margin: 0 7px;
+	padding: 7px;
+	
+}
+
+nav ul li a:hover{
+	text-decoration: underline;
+}
+
+nav .logo-chico{
+	float: left;
+	width: 30%;
+}
+
+nav .logo-chico .logo{
+	max-width: 30px;
+	height: auto;
+}
+
+nav .logo-chico .letra{
+	max-height: 30px;
+}

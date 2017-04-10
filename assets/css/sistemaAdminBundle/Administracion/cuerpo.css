@@ -1,0 +1,14 @@
+.lista{
+	float: left;
+	width: 100%;
+}
+
+.lista ul li{
+	list-style: none;
+	margin: 10px 0;
+}
+
+.lista ul li a{
+	text-decoration: none;
+	color: #3498DB;
+}

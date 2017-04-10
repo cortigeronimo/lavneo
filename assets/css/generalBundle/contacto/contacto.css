@@ -1,0 +1,19 @@
+.campos{
+	margin: 10px 0;
+}
+
+.informacion {
+	float: left;
+	width: 100%;
+}
+
+.informacion .info{
+	float: left;
+	width: 100%;
+	margin: 10px 0;
+}
+
+.informacion .info p{
+	text-indent: 20px;
+	line-height: 25px;
+}

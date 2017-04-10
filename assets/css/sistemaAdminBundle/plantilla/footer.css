@@ -1,0 +1,23 @@
+footer{
+	clear: both;
+	float: left;
+	width: 100%;
+}
+footer .copyright p{
+	text-align: center;
+	font-size: 14px;
+	font-weight: bolder;
+}
+
+footer .copyright a{
+	text-decoration: none;
+	color: #3498DB;
+}
+
+footer .copyright a:hover{
+	text-decoration: underline;
+}
+
+footer .copyright{
+	margin: 20px 0;
+}

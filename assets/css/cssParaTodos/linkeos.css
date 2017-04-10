@@ -1,0 +1,19 @@
+.linkeos{
+	display: block;
+	text-align: center;
+	width: 150px;
+	border: 2px solid black;
+	color: black;
+	text-decoration: none;
+	border-radius: 2px;
+	padding: 8px;
+	margin: 10px auto;
+	transition: all .3s ease-in;
+}
+
+.linkeos:hover{
+	transition: all .3s ease-in;
+	background: black;
+	color: white;
+	text-decoration: none;
+}

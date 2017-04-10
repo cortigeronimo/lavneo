@@ -1,0 +1,28 @@
+.inputs{
+    border: none;
+	width: 100%;
+	border-bottom: 4px solid #738694;
+	padding: 15px;
+	margin: 20px 0;
+	background: transparent;
+	color: #738694;
+}
+
+.inputs:focus{
+	outline: none;
+	border-bottom: 4px solid #ff8080;
+	color: #738694;
+}
+
+.inputs::-webkit-input-placeholder{
+	color: #738694;
+}
+.inputs::-moz-placeholder { /* Firefox 19+ */
+	color: #738694;
+}
+.inputs:-ms-input-placeholder { /* IE 10+ */
+	color: #738694;
+}
+.inputs:-moz-placeholder { /* Firefox 18- */
+	color: #738694;
+}

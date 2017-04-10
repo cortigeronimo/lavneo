@@ -1,0 +1,13 @@
+.enviar{
+	border: 2px solid #738694;
+	background: transparent;
+	padding: 10px 40px;
+	color: #738694;
+	border-radius: 2px;
+	margin: 15px 0;
+}
+
+.enviar:hover{
+	background: #738694;
+	color: white; 
+}

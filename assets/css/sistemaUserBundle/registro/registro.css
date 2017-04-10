@@ -1,0 +1,111 @@
+nav{
+	float: left;
+	background: #394854;
+	width: 100%;
+	padding: 15px 50px;
+	z-index: 2;
+	transition: all 0.5s ease-in-out;
+	position: fixed;
+}
+
+nav ul{
+	float: left;
+	width: 70%;
+	list-style: none;
+	text-align: right;
+	padding: 5px 0;
+	/*background: #005c9c;*/
+}
+
+nav ul li{
+	display: inline-block;
+
+}
+
+nav ul li a{
+	text-decoration: none;
+	color: white;
+	margin: 0 7px;
+	padding: 7px;
+	
+}
+
+nav ul li a:hover{
+	text-decoration: underline;
+}
+
+nav .logo-chico{
+	float: left;
+	width: 30%;
+}
+
+nav .logo-chico .logo{
+	max-width: 30px;
+	height: auto;
+}
+
+nav .logo-chico .letra{
+	max-height: 30px;
+}
+
+.contenedor{
+	clear: both;
+	-webkit-display: flex;
+	-o-display: flex;
+	-ms-display: flex;
+	-moz-display: flex;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 100vh;
+	text-align: center;
+}
+
+.item{
+	width: 50%;
+	margin: 0 auto;
+	
+}
+
+h1{
+	font-size: 60px;
+}
+
+h3{
+	font-size: 20px;
+}
+
+h1, h3{
+	margin: 20px 0;
+	font-weight: lighter;
+}
+
+.item h3 a{
+	font-weight: lighter;
+	color: #3899EC;
+}
+
+.item h3 a:hover{
+	text-decoration: underline;
+}
+
+.item form a{
+	display: block;
+	text-align: right;
+	margin: 20px 0 30px 0;
+	font-size: 12px;
+	font-weight: lighter;
+	color: #3899EC;
+}
+
+.item form a:hover{
+	text-decoration: underline;
+}
+
+.dos input{
+	width: 50%;
+}
+
+.tres input{
+	width: 33.333333333333333%;
+}

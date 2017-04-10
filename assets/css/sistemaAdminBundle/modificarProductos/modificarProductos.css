@@ -1,0 +1,32 @@
+.productos{
+	float: left;
+	width: 100%;
+}
+
+.producto{
+	float: left;
+	width: 100%;
+	margin: 10px 0;
+	border-right: 1px solid #CCC;
+	border-left: 1px solid #CCC;
+	border-top: 2px solid #CCC;
+	border-bottom: 2px solid #CCC; 
+}
+
+.producto .img{
+	float: left;
+	text-align: center;
+}
+
+.producto .img img{
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+}
+
+.producto .contenido-producto{
+	float: left;
+	margin: 0 0 0 20px;
+	width: 70%;
+	padding: 10px;
+}

@@ -1,0 +1,21 @@
+nav{
+	float: left;
+	width: 100%;
+}
+
+nav ul{
+	list-style: none;
+	text-align: right;
+}
+
+nav ul li{
+	display: inline-block;
+
+}
+
+nav ul li a{
+	text-decoration: none;
+	color: #3498DB;
+	margin: 0 7px;
+	
+}

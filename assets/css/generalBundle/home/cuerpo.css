@@ -1,0 +1,172 @@
+.principal{
+	clear: both;
+	-webkit-display: flex;
+	-o-display: flex;
+	-ms-display: flex;
+	-moz-display: flex;
+	display: flex;
+	width: 100%;
+	height: 100vh;
+	float: left;
+	background-image:url("../../../imagenes/generalBundle/index/FondoPrincipal/2.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	align-items: center;
+	text-align: center;
+}
+
+
+.fijo{
+	float: left;
+	width: 100%;
+	background-image: url("../../../imagenes/generalBundle/index/EfectoQueSube/lineas.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	text-align: center;
+}
+
+.fijo h2{
+	font-size: 65px;
+	padding: 100px 0;
+	color: white;
+
+}
+
+.flecha:hover{
+	transition-duration: 0.5s;
+	transform: translateY(20px);
+}
+
+.links{
+	float: left;
+	width: 100%;
+	padding: 40px 0;
+}
+
+.link{
+	float: left;
+	width: 25.333333%;
+	margin: 10px 4%;
+	text-align: center;
+	padding: 50px 80px;
+	border: 2px solid #babac2;
+	border-radius: 3px;
+	transition: all 0.7s ease-in-out;
+}
+
+.link:hover{
+	border: 2px solid black;
+	transition-timing-function: ease-in-out;
+}
+
+.link:hover img{
+	transition-duration: 0.7s;
+	transform: rotate(360deg) scale(1.2);
+}
+
+.link img{
+	transition: all 0.5s ease-in-out;
+}
+
+.link p{
+	margin: 20px 0;
+	padding: 10px 10px 30px 10px;
+	border-bottom: 2px solid black;
+}
+
+.flecha{
+	position: absolute;
+	display: block;
+	left: 50%;
+	top: 87vh;
+	text-align: center;
+	margin: 0 auto;
+	text-align:center;
+	transition: all 0.5s ease-in-out;
+	
+}
+
+.relativo{	
+	width: 450px;
+	margin: 0 auto 0 40px;
+}
+
+
+.relativo a{
+	display: inline-block;
+	background: white;
+	color: black;
+	border: 2px solid white;
+	margin: 15px 20px;
+}
+
+.registro{
+	float: left;
+	width: 100%;
+}
+
+.relativo h1{
+	font-size: 70px;
+}
+
+.relativo h2{
+
+	font-size: 20px;
+	font-weight: bolder;
+	letter-spacing: 5px;
+	
+}
+
+.relativo p{
+	letter-spacing: 2px;
+}
+
+.relativo h1, .relativo h2, .relativo p{
+	color: white;
+	margin: 10px 0;
+}
+
+.entrada{
+	text-align: center;
+}
+
+.entrada h1{
+	font-size: 60px;
+	color: black;
+	font-weight: bolder;
+}
+
+.entrada h2{
+	font-size: 25px;
+	color: black;
+	margin: 30px 0;
+}
+
+.formulario{
+	float: left;
+	width: 100%;
+	padding: 40px 0;
+	text-align: center;
+	background-color: #394854;
+	color: white;
+}
+
+.formulario h2, .formulario h3{
+	margin: 10px 0;
+	color: white;
+}
+
+.formulario h2{
+	font-size: 60px;
+}
+
+.formulario h3{
+	font-size: 30px;
+}
+
+.formulario form{
+	width: 60%;
+	margin: 0 auto;
+}
+
