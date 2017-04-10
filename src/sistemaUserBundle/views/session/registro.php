@@ -17,17 +17,19 @@
 	<div class="contenedor">
 		 <div class="item">
 		 	<h1>Registrate</h1>
-		 	<h3>¿Ya tenes una cuenta en Neomix? <a href="">Inicia Sesión</a></h3>
+		 	<h3>¿Ya tenes una cuenta en Neomix? <a href="<?php assets::ruta("inicioSesion"); ?>">Inicia Sesión</a></h3>
 		 	<form>
-		 		<div>
-		 			<input class="inputsConClase" type="text" name="usuario" placeholder="Nombre de usuario ha utilizar"><input class="inputsConClase" type="email" name="email" placeholder="Ingrese su Email"><input class="inputsConClase" type="password" name="password" placeholder="Contraseña">
+		 		<div class="dos">
+		 			<input class="inputsConClase" type="text" name="usuario" placeholder="Nombre de usuario ha utilizar"><input class="inputsConClase" type="email" name="email" placeholder="Ingrese su Email">
 		 		</div>
+		 		<input class="inputsConClase" type="password" name="password" placeholder="Contraseña">
 		 		<div class="dos">
 		 			<input class="inputsConClase" type="text" name="nombre" placeholder="Nombre de facturación del negocio"><input class="inputsConClase" type="text" name="cuit" placeholder="Número de cuit">
 		 		</div>
 		 		<div class="tres">
 		 			<input class="inputsConClase" type="text" name="postal" placeholder="Código Postal"><input class="inputsConClase" type="text" name="Calle" placeholder="Calle"><input class="inputsConClase" type="text" name="Altura" placeholder="Altura">
 		 		</div>
+		 		<input class="inputsConClase" type="text" name="text" placeholder="Aclaración sobre domicilio (número de departamento, timbre, etc) - opcional">
 		 		<div class="dos">
 		 			<input class="inputsConClase" type="text" name="telefono" placeholder="telefono"><input class="inputsConClase" type="text" name="celular" placeholder="celular">
 		 		</div>

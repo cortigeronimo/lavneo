@@ -18,7 +18,7 @@
 	<div class="contenedor">
 		 <div class="item">
 		 	<h1>Inicia Sesión</h1>
-		 	<h3>¿Nuevo en Neomix? <a href="">Registrate</a></h3>
+		 	<h3>¿Nuevo en Neomix? <a href="<?php assets::ruta("registro"); ?>">Registrate</a></h3>
 		 	<form action="<?php assets::ruta("inicioSesion"); ?>" method="POST">
 		 		<input class="inputsConClase" type="text" name="usuario" placeholder="Usuario o Email">
 		 		<input class="inputsConClase" type="password" name="password" placeholder="Contraseña">
