@@ -23,7 +23,18 @@
 		}
 
 		public function registro(){
-			Vista::crear(USER_BUNDLE."views/session/registro.php");
+			
+			if($_SERVER['REQUEST_METHOD'] == "POST"){
+				$usuario = new Usuario();
+				$usuario->setUsuario();
+				$usuario->setPassword();
+				$usuario->setEmail();
+				$usuario->insertar();
+				$usuario->traerUsuario();
+				$datos = new Datos();
+				$datos->asignarUsuario();
+			}
+				Vista::crear(USER_BUNDLE."views/session/registro.php");
 		}
 
 		public function cerrarSesion(){
