@@ -1,12 +1,15 @@
 <?php
 
-	class Producto{
+	class Producto extends ConexionConMysql{
 
-		private $codigo;
+		//private $codigo;
 		private $nombre;
 		private $descripcion;
 		private $precio;
 		private $imagen;
+		private $categoria;
+		private $descuentos = array();
+		private $impuestos = array();
 		CONST TABLA = "productos";
 
 		public function crearTabla(){
@@ -83,5 +86,91 @@
 			return $rows;
 		}
 
+	    public function getCodigo()
+	    {
+	        return $this->codigo;
+	    }
 
-	}
+	    public function setCodigo($codigo)
+	    {
+	        $this->codigo = $codigo;
+	    }
+
+	    public function getNombre()
+	    {
+	        return $this->nombre;
+	    }
+
+	    public function setNombre($nombre)
+	    {
+	        $this->nombre = $nombre;
+	    }
+
+	    public function getDescripcion()
+	    {
+	        return $this->descripcion;
+	    }
+
+	    public function setDescripcion($descripcion)
+	    {
+	        $this->descripcion = $descripcion;
+	    }
+
+	    public function getPrecio()
+	    {
+	        return $this->precio;
+	    }
+
+	    public function setPrecio($precio)
+	    {
+	        $this->precio = $precio;
+	    }
+
+	    public function getImagen()
+	    {
+	        return $this->imagen;
+	    }
+
+	    public function setImagen($imagen)
+	    {
+	        $this->imagen = $imagen;
+	    }
+
+	    public function getCategoria()
+	    {
+	        return $this->categoria;
+	    }
+
+	    public function setCategoria($categoria)
+	    {
+	        $this->categoria = $categoria;
+	    }
+
+	    public function getDescuentos()
+	    {
+	        return $this->descuentos;
+	    }
+
+	    public function setDescuentos($descuentos)
+	    {
+	        $this->descuentos = $descuentos;
+	    }
+
+	    public function agregarDescuento($descuento){
+	    	$this->descuentos[] = $descuento;
+	    }
+
+	    public function getImpuestos()
+	    {
+	        return $this->impuestos;
+	    }
+
+	    public function setImpuestos($impuestos)
+	    {
+	        $this->impuestos[] = $impuestos;
+	    }
+
+	    public function agregarImpuesto($impuesto){
+	    	$this->impuestos[] = $impuesto;
+	    }
+}

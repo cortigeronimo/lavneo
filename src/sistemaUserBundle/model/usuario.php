@@ -1,19 +1,20 @@
 <?php
 
-	class Usuario{
+	class Usuario extends ConexionConMysql{
 
 		private $id;
-		private $usuario;
-		private $password;
 		private $email;
+		private $password;
         private $inscripcion;
         private $isActive;
+        private $rol;
+        private $datos;
+        private $pedidos = array();
 		CONST TABLA = "usuarios";
 
         function __construct(){
             $this->inscripcion = new DateTime();
         }
-
 
 		public function insertar(){
 			$cn = conexion::conectar();
@@ -37,7 +38,7 @@
 
 		public function buscarElUsuario(){
 			$cn = conexion::conectar();
-			$query = "SELECT * FROM ".self::TABLA." WHERE usuario = '". $this->usuario ."' AND password = '". $this->password. "'";
+			$query = "SELECT * FROM ".self::TABLA." WHERE email = '". $this->email ."' AND password = '". $this->password. "'";
 			$resultado = $cn->query($query);
 			conexion::cerrar($cn);
 			if($resultado){
@@ -50,7 +51,7 @@
 
         public function buscarPor($string, $valor){
             $cn = conexion::conectar();
-            $query = "SELECT * FROM ".self::TABLA." WHERE ".$string." = '". $usuario ."'";
+            $query = "SELECT * FROM ".self::TABLA." WHERE ".$string." = '". $valor ."'";
             $resultado = $cn->query($query);
             conexion::cerrar($cn);
             if($resultado){
@@ -59,6 +60,26 @@
             } else{
                 return false;
             }
+        }
+
+        public function getPedidos(){
+            return $this->pedidos;
+        }
+
+        public function setPedidos($pedidos = array()){
+            $this->pedidos = $pedidos;
+        }
+
+        public function agregarPedido($pedido){
+            $this->pedidos[] = $pedido;
+        }
+
+        public function getRol(){
+            return $this->rol;
+        }
+
+        public function setRol($rol){
+            $this->rol = $rol;
         }
 	
 
@@ -71,20 +92,6 @@
         public function setId($id)
         {
             $this->id = $id;
-
-            return $this;
-        }
-
-
-        public function getUsuario()
-        {
-            return $this->usuario;
-        }
-
-
-        public function setUsuario($usuario)
-        {
-            $this->usuario = $usuario;
 
             return $this;
         }

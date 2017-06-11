@@ -1,114 +1,121 @@
 <?php
+    
+	class Datos extends ConexionConMysql{
 
-	class Datos{
-
-			private $id;
-			private $id_user
-			private $nombre_facturacion;
-			private $codigo_postal;
-			private $calle;
-			private $altura;
-			private $aclaracion;
-			private $telefono;
-			private $celular;
-			CONST TABLA = "datos_usuario";
+		private $nombre_facturacion;
+		private $codigo_postal;
+		private $calle;
+		private $altura;
+		private $aclaracion;
+		private $telefono;
+		private $celular;
+        private $localidad;
+        private $cuit;
+		CONST TABLA = "datos_usuario";
 
 
 
-	
-    public function getId()
-    {
-        return $this->id;
-    }
+        public function getNombreFacturacion()
+        {
+            return $this->nombre_facturacion;
+        }
 
-    private function setId($id)
-    {
-        $this->id = $id;
+        private function setNombreFacturacion($nombre_facturacion)
+        {
+            $this->nombre_facturacion = $nombre_facturacion;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function getNombreFacturacion()
-    {
-        return $this->nombre_facturacion;
-    }
+        public function getCodigoPostal()
+        {
+            return $this->codigo_postal;
+        }
 
-    private function setNombreFacturacion($nombre_facturacion)
-    {
-        $this->nombre_facturacion = $nombre_facturacion;
+        private function setCodigoPostal($codigo_postal)
+        {
+            $this->codigo_postal = $codigo_postal;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function getCodigoPostal()
-    {
-        return $this->codigo_postal;
-    }
+        public function getCalle()
+        {
+            return $this->calle;
+        }
 
-    private function setCodigoPostal($codigo_postal)
-    {
-        $this->codigo_postal = $codigo_postal;
+        private function setCalle($calle)
+        {
+            $this->calle = $calle;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function getCalle()
-    {
-        return $this->calle;
-    }
+        public function getAltura()
+        {
+            return $this->altura;
+        }
 
-    private function setCalle($calle)
-    {
-        $this->calle = $calle;
+        private function setAltura($altura)
+        {
+            $this->altura = $altura;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function getAltura()
-    {
-        return $this->altura;
-    }
+        public function getAclaracion()
+        {
+            return $this->aclaracion;
+        }
 
-    private function setAltura($altura)
-    {
-        $this->altura = $altura;
+        private function setAclaracion($aclaracion)
+        {
+            $this->aclaracion = $aclaracion;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function getAclaracion()
-    {
-        return $this->aclaracion;
-    }
+        public function getTelefono()
+        {
+            return $this->telefono;
+        }
 
-    private function setAclaracion($aclaracion)
-    {
-        $this->aclaracion = $aclaracion;
+        private function setTelefono($telefono)
+        {
+            $this->telefono = $telefono;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function getTelefono()
-    {
-        return $this->telefono;
-    }
+        public function getCelular()
+        {
+            return $this->celular;
+        }
 
-    private function setTelefono($telefono)
-    {
-        $this->telefono = $telefono;
+        private function setCelular($celular)
+        {
+            $this->celular = $celular;
 
-        return $this;
-    }
+            return $this;
+        }
 
-    public function getCelular()
-    {
-        return $this->celular;
-    }
+        public function getLocalidad()
+        {
+            return $this->localidad;
+        }
 
-    private function setCelular($celular)
-    {
-        $this->celular = $celular;
+        private function setLocalidad($localidad)
+        {
+            $this->localidad = $localidad;
+        }
 
-        return $this;
-    }
+        public function getCuit()
+        {
+            return $this->cuit;
+        }
+
+        private function setCuit($cuit)
+        {
+            $this->cuit = $cuit;
+        }
 }

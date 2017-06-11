@@ -25,6 +25,7 @@
 	require_once APP_RUTA."clases/controlador/email.php";
 	require_once APP_RUTA."clases/vista/assets.php";
 	require_once APP_RUTA."clases/controlador/sesiones.php";
+	require_once APP_RUTA."clases/clasesMadre/conexionConMysql.php";
 	require_once CONFIG."conexion.php";
 	require_once "ruta.php";
 	require_once RUTA."rutas.php";
