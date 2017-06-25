@@ -2,9 +2,8 @@
 
 	class Usuario extends ConexionConMysql{
 
-		private $id;
+        private $password;
 		private $email;
-		private $password;
         private $inscripcion;
         private $isActive;
         private $rol;

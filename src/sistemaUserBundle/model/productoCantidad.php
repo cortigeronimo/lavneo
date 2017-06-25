@@ -1,6 +1,7 @@
 <?php
 
 	class ProductoCantidad extends ConexionConMysql{
+
 		private $cantidad;
 		private $productos = array();
 		CONST TABLA = "pedido_producto";

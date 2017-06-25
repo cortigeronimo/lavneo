@@ -11,7 +11,7 @@
 		private $celular;
         private $localidad;
         private $cuit;
-		CONST TABLA = "datos_usuario";
+		CONST TABLA = "datos";
 
 
 
