@@ -34,13 +34,17 @@
 
 			<div class="contenido-producto">
 				<h2><?php echo $producto['nombre'];?></h2>
-				<h5>Código: <a href="<?php assets::ruta('producto/'.$producto['codigo'].'/'.str_replace(" ","-",$producto['nombre'])); ?>" title="">#<?php echo $producto['codigo']; ?></a></h5>
+				<!--<h5>Código: <a href="<?php assets::ruta('producto/'.$producto['codigo'].'/'.str_replace(" ","-",$producto['nombre'])); ?>" title="">#<?php echo $producto['codigo']; ?></a></h5> -->
 				<p><?php echo $producto['descripcion'];?></p>
+				<?php sesiones::abrirSesion(); if(isset($_SESSION['id'])){ ?>
 				<p class="precio">$<?php echo $producto['precio']?><span>  (con IVA incluído)</span></p>
+				<?php } else{ ?>
+				<p class="precio">Precio:<span>Disponible solo para usuarios</span></p>
+				<?php }?>
 			</div>				
 
 			<div class="mas">
-				<a href="<?php assets::ruta('producto/'.$producto['codigo'].'/'.str_replace(" ","-",$producto['nombre'])); ?>">Ver más</a>	
+				<a href="<?php assets::ruta('producto/'.str_replace(" ","-",$producto['nombre'])); ?>">Ver más</a>	
 			</div>
 
 		</div>

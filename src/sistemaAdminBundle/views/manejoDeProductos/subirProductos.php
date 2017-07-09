@@ -3,7 +3,7 @@
 
 <?php ob_start() ?>
 
-	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<form action="<?php assets::ruta("subirProductos"); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
 		<div class="campos">
 			<label>Nombre del Producto:</label>
@@ -23,6 +23,15 @@
 		<div class="campos">
 			<label>Imagen(opcional):</label>
 			<input type="file" name="archivo">
+		</div>
+
+		<div class="campos">
+			<label>Categoría:</label>
+			<select>
+				<?php foreach($categorias as $categoria){ ?>
+				<option value="<?php echo $categoria->getNombre();?>"><?php $categoria->getNombre()?></option>
+				<?php } ?>
+			</select>
 		</div>
 
 		<div class="campos">

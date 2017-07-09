@@ -1,5 +1,5 @@
 <?php
-
+	include_once 'direccionador.php';
 	//vendriá a ser el routing.yml de symfony
 
 	/*set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
@@ -34,31 +34,31 @@
 	$ruta = new Ruta();
 	try{
 		$ruta->controladores(array(
-			"/" => array("bundle" => "generalBundle", "controlador" => "generalController", "metodo" => "index"),
+			"/" => new Direccionador("generalBundle", "generalController", "index"),
 
-			"/catalogo-de-productos" => array("bundle" => "generalBundle", "controlador" => "generalController", "metodo" => "galeria"),
+			"/catalogo-de-productos" => new Direccionador("generalBundle", "generalController", "galeria"),
 
-			"/geronimoCorti" => array("bundle" => "generalBundle", "controlador" => "generalController", "metodo" => "geronimoCorti"),
+			"/geronimoCorti" => new Direccionador("generalBundle", "generalController", "geronimoCorti"),
 
-			"/organizacion" => array("bundle" => "generalBundle", "controlador" => "generalController", "metodo" => "organizacion"),
+			"/organizacion" => new Direccionador("generalBundle", "generalController", "organizacion"),
 
-			"/contacto" => array("bundle" => "generalBundle", "controlador" => "generalController", "metodo" =>"contacto"),
+			"/contacto" => new Direccionador("generalBundle", "generalController", "contacto"),
 
-			"/administracion" => array("bundle" => "sistemaAdminBundle", "controlador" => "adminController", "metodo" => "administracion"),
+			"/administracion" => new Direccionador("sistemaAdminBundle", "principalController", "administracion"),
 
-			"/subir-productos" => array("bundle" => "sistemaAdminBundle", "controlador" => "manejoDeProductosController", "metodo" => "subirProductos"),
+			"/subir-productos" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "subirProductos"),
 
-			"/eliminar-productos" => array("bundle" => "sistemaAdminBundle", "controlador" => "manejoDeProductosController", "metodo" => "eliminarProductos"),
+			"/eliminar-productos" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "eliminarProductos"),
 
-			"/modificar-productos" => array("bundle" => "sistemaAdminBundle", "controlador" => "manejoDeProductosController", "metodo" => "modificarProductos"),
+			"/modificar-productos" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "modificarProductos"),
 
-			"/producto" => array("bundle" => "generalBundle", "controlador" => "generalController", "metodo" => "producto"),
+			"/producto" => new Direccionador("generalBundle", "generalController", "producto"),
 
-			"/inicioSesion" => array("bundle" => "sistemaUserBundle", "controlador" => "sessionController", "metodo" => "inicioSesion"),
+			"/inicioSesion" => new Direccionador("sistemaUserBundle", "sessionController", "inicioSesion"),
 
-			"/registro" => array("bundle" => "sistemaUserBundle", "controlador" => "sessionController", "metodo" => "registro"),
+			"/registro" => new Direccionador("sistemaUserBundle", "sessionController", "registro"),
 
-			"/cerrarSesion" => array("bundle" => "sistemaUserBundle", "controlador" => "sessionController", "metodo" => "cerrarSesion"),
+			"/cerrarSesion" => new Direccionador("sistemaUserBundle", "sessionController", "cerrarSesion"),
 
 			));
 	}

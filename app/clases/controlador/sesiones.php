@@ -7,19 +7,24 @@
 			return true;
 		}
 
-		public static function crearSesion($id, $usuario){
+		public static function crearSesion($id, $email){
 			session_start();
 
 			$_SESSION['id']  = $id;
-			$_SESSION['usuario'] = $usuario;
+			$_SESSION['email'] = $email;
 
 
 			//session_write_close();
 		}
 
+		public static function abrirSesion(){
+			session_start();
+		}
+
 		public static function cerrarSesion(){
-			self::iniciarSesion();
+			self::abrirSesion();
 			session_destroy();
+			Redireccionar::redireccionarARuta('/');
 		}
 
 

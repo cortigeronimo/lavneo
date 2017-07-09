@@ -5,6 +5,10 @@
 		private $nombre;
 		CONST TABLA = "categorias";
 
+		function __contruct(){
+			$this->tabla = "categorias";
+		}
+
 		public function getNombre(){
 			return $this->nombre;
 		}

@@ -8,11 +8,11 @@
 
 			if($_SERVER['REQUEST_METHOD'] == "POST"){
 				$usuario = new Usuario();
-				$usuario->setUsuario($_POST['usuario']);
+				$usuario->setEmail($_POST['usuario']);
 				$usuario->setPassword($_POST['password']);
 				$existencia = $usuario->buscarElUsuario();
 				if($existencia){
-					Sesiones::crearSesion($existencia[0]->id, $existencia[0]->usuario);
+					Sesiones::crearSesion($existencia[0]->id, $existencia[0]->email);
 					Redireccionar::redireccionarARuta('/');
 				}
 

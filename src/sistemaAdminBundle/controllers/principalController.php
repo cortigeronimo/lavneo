@@ -6,7 +6,7 @@
 
 
 		public function administracion(){
-			return Vista::crear(ADMIN_BUNDLE."views/administracion.php");
+			return Vista::crear(ADMIN_BUNDLE."views/principal/administracion.php");
 		}
 
 	}

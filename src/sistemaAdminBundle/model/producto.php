@@ -29,24 +29,20 @@
 
 		}
 
-		public function subir($nombre, $descripcion, $precio, $imagen){
+		public function subir(){
 
 			$cn = conexion::conectar();
-			$this->codigo = rand(0,1000);
-			$query = "SELECT codigo FROM ".self::TABLA."WHERE codigo = ".$this->codigo;
-			
-			while($resultado = $cn->query($query)){
-				$this->codigo = rand(0,1000);
+
+			$query = "INSERT INTO ".self::TABLA." (nombre,descripcion,precio,imagen) VALUES ('".$this->nombre."','".$this->descripcion."', '".$this->precio."', '".$this->imagen."') ";
+			try{
+				$resultado = $cn->query($query);	
 			}
-
-			$this->nombre = $nombre;
-			$this->descripcion = $descripcion;
-			$this->precio = $precio;
-			$this->imagen = $imagen;
-
-			$query = "INSERT INTO ".self::TABLA." (codigo,nombre,descripcion,precio,imagen) VALUES ('".$this->codigo."','".$this->nombre."','".$this->descripcion."', '".$this->precio."', '".$this->imagen."') ";
-			$resultado = $cn->query($query);
-			conexion::cerrar($cn);
+			catch(Exception $e){
+				throw new ExceptionCrearProducto("Error al cargar el producto, intentelo de nuevo.");
+			}
+			finally{
+				conexion::cerrar($cn);
+			}
 			return $resultado;
 		}
 
@@ -70,16 +66,6 @@
 		public function buscarPorNombre($nombre){
 			$cn = conexion::conectar();
 			$query = "SELECT * FROM ".self::TABLA." WHERE nombre = ".$nombre;
-			$resultado = $cn->query($query);
-			$rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
-			conexion::cerrar($cn);
-			return $rows;
-		}
-
-		public function buscarTodos(){
-			$cn = conexion::conectar();
-			$rows = array();
-			$query = "SELECT * FROM ".self::TABLA." ORDER BY nombre ASC";
 			$resultado = $cn->query($query);
 			$rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
 			conexion::cerrar($cn);

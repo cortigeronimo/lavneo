@@ -16,11 +16,6 @@
 				$longitud = count($paths);
 
 					$respuesta = $this->buscarEnElArray($urlnueva);
-
-					$bundle = $respuesta["bundle"];
-					$controlador = $respuesta["controlador"];
-					$metodo = $respuesta["metodo"];
-					// revisar luego
 					$parametros = array();
 
 						if($longitud >= 3){
@@ -28,12 +23,12 @@
 								$parametros[] = $paths[$j];
 							}
 							
-							return $this->getController($bundle,$controlador,$metodo,$parametros);
+							return $this->getController($respuesta->getBundle(),$respuesta->getControlador(),$respuesta->getMetodo(),$parametros);
 
 						}
 
 						else{
-							return $this->getController($bundle,$controlador,$metodo, NULL);
+							return $this->getController($respuesta->getBundle(),$respuesta->getControlador(),$respuesta->getMetodo(), NULL);
 						}
 
 		}
