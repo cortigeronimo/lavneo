@@ -9,7 +9,7 @@
 		CONST TABLA = "pedidos";
 
 		public function getFecha(){
-			return $this->fecha,
+			return $this->fecha;
 		}
 
 		public function setFecha($fecha){
@@ -17,7 +17,7 @@
 		}
 
 		public function getHora(){
-			return $this->hora,
+			return $this->hora;
 		}
 
 		public function setHora($hora){
@@ -25,7 +25,7 @@
 		}
 
 		public function getEstado(){
-			return $this->estado,
+			return $this->estado;
 		}
 
 		public function setEstado($estado){

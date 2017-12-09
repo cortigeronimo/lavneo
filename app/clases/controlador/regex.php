@@ -1,13 +1,12 @@
 <?php
-	
-	class Regex{
-		private huboError = false;
-		private errores = [];
+	class regex{
+            private $huboError;
+            private $errores = [];
 
-		public function regexUsuario(){}
-		public function regexPassword(){}
-		public function regexCuil(){}
-		public function regexEmail(){}
-		public function regexSoloLetras(){}
-		public function regexSoloNumeros(){}
+            public function regexUsuario(){}
+            public function regexPassword(){}
+            public function regexCuil(){}
+            public function regexEmail(){}
+            public function regexSoloLetras(){}
+            public function regexSoloNumeros(){}
 	}

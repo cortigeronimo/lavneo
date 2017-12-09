@@ -1,6 +1,7 @@
 <?php
 	include_once 'direccionador.php';
 	//vendriá a ser el routing.yml de symfony
+	//agregar esto que esta comentado cuando se suba el proyecto
 
 	/*set_error_handler(function($errno, $errstr, $errfile, $errline, array $errcontext) {
 	    // error was suppressed with the @-operator
@@ -10,57 +11,42 @@
 
 	    throw new ErrorException();
 	});*/
-
-	/**************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	******************************************AGREGAR AL FINAL DEL PROYECTO****************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	***************************************************************************************************************
-	*/
 	
-	$ruta = new Ruta();
+	$mainController = new mainController();
+	
+	$controladores = array(
+		"/" => new Direccionador("generalBundle", "generalController", "index", 0),
+
+		"/catalogo-de-productos" => new Direccionador("generalBundle", "generalController", "catalogo", 0),
+
+		"/geronimoCorti" => new Direccionador("generalBundle", "generalController", "geronimoCorti", 0),
+
+		"/organizacion" => new Direccionador("generalBundle", "generalController", "organizacion", 0),
+
+		"/contacto" => new Direccionador("generalBundle", "generalController", "contacto", 0),
+
+		"/administracion" => new Direccionador("sistemaAdminBundle", "principalController", "administracion", 0),
+
+		"/alta/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "subirProductos", 0),
+
+		"/baja/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "eliminarProductos", 0),
+
+		"/modificacion/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "modificarProductos", 0),
+
+		"/producto" => new Direccionador("generalBundle", "generalController", "producto", 1),
+
+		"/sesion/inicio" => new Direccionador("sistemaUserBundle", "sessionController", "inicioSesion", 0),
+
+		"/registro" => new Direccionador("sistemaUserBundle", "sessionController", "registro", 0),
+
+		"/sesion/cerrar" => new Direccionador("sistemaUserBundle", "sessionController", "cerrarSesion", 0),
+
+		);
+
+	$mainController->setControllers($controladores);
+
 	try{
-		$ruta->controladores(array(
-			"/" => new Direccionador("generalBundle", "generalController", "index"),
-
-			"/catalogo-de-productos" => new Direccionador("generalBundle", "generalController", "galeria"),
-
-			"/geronimoCorti" => new Direccionador("generalBundle", "generalController", "geronimoCorti"),
-
-			"/organizacion" => new Direccionador("generalBundle", "generalController", "organizacion"),
-
-			"/contacto" => new Direccionador("generalBundle", "generalController", "contacto"),
-
-			"/administracion" => new Direccionador("sistemaAdminBundle", "principalController", "administracion"),
-
-			"/subir-productos" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "subirProductos"),
-
-			"/eliminar-productos" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "eliminarProductos"),
-
-			"/modificar-productos" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "modificarProductos"),
-
-			"/producto" => new Direccionador("generalBundle", "generalController", "producto"),
-
-			"/inicioSesion" => new Direccionador("sistemaUserBundle", "sessionController", "inicioSesion"),
-
-			"/registro" => new Direccionador("sistemaUserBundle", "sessionController", "registro"),
-
-			"/cerrarSesion" => new Direccionador("sistemaUserBundle", "sessionController", "cerrarSesion"),
-
-			));
+		$mainController->run();
 	}
 
 	catch(Excepcion404 $e){

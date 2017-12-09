@@ -4,11 +4,13 @@
 		private $bundle;
 		private $controlador;
 		private $metodo;
+		private $cantidadDeParametros;
 
-		function __construct( $bundle, $controlador, $metodo){
+		function __construct( $bundle, $controlador, $metodo, $cantidadDeParametros){
 			$this->bundle = $bundle;
 			$this->controlador = $controlador;
 			$this->metodo = $metodo;
+			$this->cantidadDeParametros = $cantidadDeParametros;
 		}
 
 		public function getBundle(){
@@ -21,5 +23,9 @@
 
 		public function getMetodo(){
 			return $this->metodo;
+		}
+
+		public function getCantidadDeParametro(){
+			return $this->cantidadDeParametros;
 		}
 	}

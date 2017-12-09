@@ -12,12 +12,12 @@
 				$precio = $_POST["precio"];
 				$ruta = "";
 				//luego hacer una funcion que pregunte si ya existe ese numero
-					if((isset($_FILES['archivo'])) && ($_FILES['archivo'] !='')){
-		                $temName = $_FILES['archivo']['tmp_name']; //Obtenemos el directorio temporal en donde se ha almacenado el archivo;
-		                $ruta = ASSETS_RUTA . "imagenes/productos/" . $_FILES['archivo']['name']; //donde guardo el archivo
-		                $resultado = @move_uploaded_file($temName, $ruta);
-		                $ruta = $_FILES['archivo']['name'];
-	                }
+				if((isset($_FILES['archivo'])) && ($_FILES['archivo'] !='')){
+			        $temName = $_FILES['archivo']['tmp_name']; //Obtenemos el directorio temporal en donde se ha almacenado el archivo;
+			        $ruta = ASSETS_RUTA . "imagenes/productos/" . $_FILES['archivo']['name']; //donde guardo el archivo
+			        $resultado = @move_uploaded_file($temName, $ruta);
+			    	$ruta = $_FILES['archivo']['name'];
+	            }
 	            $categoria = new Categoria();
 	            $producto = new Producto();
 	            $categoria->setProducto($producto);

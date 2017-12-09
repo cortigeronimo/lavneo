@@ -6,12 +6,12 @@
 			Vista::crear(GENERAL_BUNDLE."views/index.php");
 		}
 
-		public function galeria(){
+		public function catalogo(){
 
 			require_once ADMIN_BUNDLE."model/producto.php";
 			$producto = new Producto();
 			$productos = $producto->buscarTodos();
-			Vista::crear(GENERAL_BUNDLE."views/galeria.php", "productos", $productos);
+			Vista::crear(GENERAL_BUNDLE."views/catalogo.php", "productos", $productos);
 		}
 
 		public function producto($producto){
