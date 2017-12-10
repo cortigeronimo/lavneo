@@ -1,46 +1,46 @@
-<?php 
+<?php
 
-	class Pedido extends MasterBD{
+class Pedido extends MasterBD {
 
-		private $fecha;
-		private $hora;
-		private $estado;
-		private $producto_cantidad = array();
-		CONST TABLA = "pedidos";
+    private $fecha;
+    private $hora;
+    private $estado;
+    private $items = array();
+    
+    public function getFecha() {
+        return $this->fecha;
+    }
 
-		public function getFecha(){
-			return $this->fecha;
-		}
+    public function getHora() {
+        return $this->hora;
+    }
 
-		public function setFecha($fecha){
-			$this->fecha = $fecha;
-		}
+    public function getEstado() {
+        return $this->estado;
+    }
 
-		public function getHora(){
-			return $this->hora;
-		}
+    public function getItems() {
+        return $this->items;
+    }
 
-		public function setHora($hora){
-			$this->hora = $hora;
-		}
+    public function setFecha() {
+        $this->fecha = new DateTime();
+    }
 
-		public function getEstado(){
-			return $this->estado;
-		}
+    public function setHora() {
+        $this->hora = new DateTime();
+    }
 
-		public function setEstado($estado){
-			$this->estado = $estado;
-		}
+    public function setEstado($estado) {
+        $this->estado = $estado;
+    }
 
-		public function getProductoCantidad(){
-			return $this->producto_cantidad;
-		}
+    public function setItems($items) {
+        $this->items = $items;
+    }
+    
+    public function addItem($item) {
+        $this->items = $item;
+    }
 
-		public function setProductoCantidad($producto_cantidad){
-			$this->producto_cantidad[] = $producto_cantidad;
-		}
-
-		public function agregarProducto($producto){
-			$this->producto_cantidad[] = $producto;
-		}
-	}
+}

@@ -10,7 +10,7 @@
 
 			require_once ADMIN_BUNDLE."model/producto.php";
 			$producto = new Producto();
-			$productos = $producto->buscarTodos();
+			$productos = $producto->findAll();
 			Vista::crear(GENERAL_BUNDLE."views/catalogo.php", "productos", $productos);
 		}
 
