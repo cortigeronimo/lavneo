@@ -1,6 +1,8 @@
 <?php
 
-    class RepositoryCategoria{
-        
+    class RepositoryCategoria extends Repository{
+        function __construct(){
+            $this->tabla = "categorias";
+        }
     }
 

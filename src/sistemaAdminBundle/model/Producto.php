@@ -10,41 +10,6 @@
 		private $categoria;
 		private $productoImpuesto = array();
 
-		public function crearTabla(){
-			$cn = conexion::conectar();
-			$query = 'SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-			SET time_zone = "+00:00";
-			CREATE TABLE `productos` (
-			`codigo` bigint(20) NOT NULL,
-			`nombre` varchar(80) NOT NULL,
-			`descripcion` mediumtext NOT NULL,
-			`precio` double NOT NULL,
-			`imagen` varchar(100) NOT NULL
-			) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-			ALTER TABLE `productos` ADD UNIQUE KEY `codigo` (`codigo`);
-	  		ALTER TABLE `productos` MODIFY `codigo` bigint(20) NOT NULL AUTO_INCREMENT;';
-  			$resultado = $cn->query($query);
-
-		}
-
-
-		public function subir(){
-
-			$cn = conexion::conectar();
-
-			$query = "INSERT INTO ".self::TABLA." (nombre,descripcion,precio,imagen) VALUES ('".$this->nombre."','".$this->descripcion."', '".$this->precioUnitario."', '".$this->imagen."') ";
-			try{
-				$resultado = $cn->query($query);	
-			}
-			catch(Exception $e){
-				throw new ExceptionCrearProducto("Error al cargar el producto, intentelo de nuevo.");
-			}
-			finally{
-				conexion::cerrar($cn);
-			}
-			return $resultado;
-		}
-
 		public function eliminar(){
 
 		}
