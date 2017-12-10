@@ -1,6 +1,6 @@
 <?php 
 
-	class Pedido extends ConexionConMysql{
+	class Pedido extends MasterBD{
 
 		private $fecha;
 		private $hora;

@@ -1,7 +1,5 @@
 <?php
 
-//defino ruta principal
-echo "holi";
 define("RUTA_BASE", dirname(realpath(__FILE__))."/");
 define("APP_RUTA", RUTA_BASE."app/");
 define("ASSETS_RUTA", RUTA_BASE."assets/");

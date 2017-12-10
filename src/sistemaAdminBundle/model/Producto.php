@@ -1,16 +1,14 @@
 <?php
 
-	class Producto extends ConexionConMysql{
+	class Producto extends masterBD{
 
 		//private $codigo;
 		private $nombre;
 		private $descripcion;
-		private $precio;
+		private $precioUnitario;
 		private $imagen;
 		private $categoria;
-		private $descuentos = array();
-		private $impuestos = array();
-		CONST TABLA = "productos";
+		private $productoImpuesto = array();
 
 		public function crearTabla(){
 			$cn = conexion::conectar();
@@ -29,11 +27,12 @@
 
 		}
 
+
 		public function subir(){
 
 			$cn = conexion::conectar();
 
-			$query = "INSERT INTO ".self::TABLA." (nombre,descripcion,precio,imagen) VALUES ('".$this->nombre."','".$this->descripcion."', '".$this->precio."', '".$this->imagen."') ";
+			$query = "INSERT INTO ".self::TABLA." (nombre,descripcion,precio,imagen) VALUES ('".$this->nombre."','".$this->descripcion."', '".$this->precioUnitario."', '".$this->imagen."') ";
 			try{
 				$resultado = $cn->query($query);	
 			}
@@ -104,12 +103,12 @@
 
 	    public function getPrecio()
 	    {
-	        return $this->precio;
+	        return $this->precioUnitario;
 	    }
 
 	    public function setPrecio($precio)
 	    {
-	        $this->precio = $precio;
+	        $this->precioUnitario = $precio;
 	    }
 
 	    public function getImagen()
@@ -159,4 +158,26 @@
 	    public function agregarImpuesto($impuesto){
 	    	$this->impuestos[] = $impuesto;
 	    }
+            
+            public function getPrecioUnitario() {
+                return $this->precioUnitario;
+            }
+
+            public function getProductoImpuesto() {
+                return $this->productoImpuesto;
+            }
+
+            public function setPrecioUnitario($precioUnitario) {
+                $this->precioUnitario = $precioUnitario;
+            }
+
+            public function setProductoImpuesto($productoImpuesto) {
+                $this->productoImpuesto = $productoImpuesto;
+            }
+            
+            public function addProductoBeneficio($productoBeneficio){
+                $this->productoBeneficio[] = $productoBeneficio;
+            }
+
+
 }

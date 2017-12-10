@@ -1,93 +1,123 @@
 <?php
-	
-	require_once APP_RUTA."excepciones/excepciones.php";
-	require_once APP_RUTA."clases/controlador/redireccionar.php";
-	require_once APP_RUTA."clases/vista/vista.php";
-	require_once APP_RUTA."clases/herramientas/herramientasParaMysql.php";
-	require_once APP_RUTA."clases/controlador/email.php";
-	require_once APP_RUTA."clases/vista/assets.php";
-	require_once APP_RUTA."clases/controlador/sesiones.php";
-	require_once APP_RUTA."clases/clasesMadre/conexionConMysql.php";
-	require_once CONFIG."conexion.php";
-	require_once RUTA."rutas.php";
 
-	class mainController{
+require_once APP_RUTA . "excepciones/excepciones.php";
+require_once APP_RUTA . "clases/controlador/redireccionar.php";
+require_once APP_RUTA . "clases/vista/vista.php";
+require_once APP_RUTA . "clases/herramientas/herramientasParaMysql.php";
+require_once APP_RUTA . "clases/controlador/email.php";
+require_once APP_RUTA . "clases/vista/assets.php";
+require_once APP_RUTA . "clases/controlador/sesiones.php";
+require_once APP_RUTA . "clases/clasesMadre/masterBD.php";
+require_once RUTA . "rutas.php";
 
-		private $_controladores = array();
+class mainController {
 
-		public function setControllers($controladores){
-			$this->_controladores = $controladores;
-		}
+    private $_controladores = array();
 
-		public function run(){
-			$uri = isset($_GET["uri"])? "/".$_GET["uri"]:"/";
-			$direccionador = $this->buscarDireccionador($uri);
+    public function setControllers($controladores) {
+        $this->_controladores = $controladores;
+    }
 
-			if($direccionador->cantidadDeParametrs() == 0){
-			$this->getController($direccionador->getBundle(),$direccionador->getControlador(),$direccionador->getMetodo(), NULL);
-			}
+    public function getControllers() {
+        return $this->_controladores;
+    }
 
-			else{
-				$parametros = $this->obtenerParametrosDeUnaRuta($uri, $direccionador->getCantidadDeParametros());
-				$this->getController($direccionador->getBundle(),$direccionador->getControlador(),$direccionador->getMetodo(), $parametros);
-			}
+    public function run() {
+        $uri = isset($_GET["uri"]) ? "/" . $_GET["uri"] : "/";
+        $direccionador = $this->obtenerDireccionador($uri);
 
-		}
+        $this->getController($direccionador->getBundle(), $direccionador->getControlador(), $direccionador->getMetodo(), $direccionador->getParametros());
+    }
 
-		private function obtenerParametrosDeUnaRuta($uri, $cantidadDeParametros){
-			$split = explode("/", $uri);
-			$longitudArray = count($split);
-			$posicionInicial = $longitudArray - $cantidadDeParametros;
-			$parametros = array();
-			while($posicionInicial < $longitudArray){
-				$parametros[] = $split[$posicionInicial];
-				$posicionInicial++;
-			}
+    public function obtenerDireccionador($uri) {
+        foreach ($this->_controladores as $key => $value) {
+            if ($this->matchea($uri, $key, $value)) {
+                return $value;
+            }
+        }
 
-			return $parametros;
-		}
+        throw new Exception404();
+    }
 
-		private function buscarDireccionador($string){
-			foreach ($this->_controladores as $key => $value) {
-				if(substr_count($string, $key) == 1 && subpos($string, $key) == 0){
-					return $value;
-				}
-			}
+    public function matchea($uri, $router, $direccionador) {
+        if(strcmp($uri, "/") == 0){
+            return true;
+        }
+        $contadorArray = 1;
+        $splitUri = explode("/", $uri);
+        $splitRouter = explode("/", $router);
+        $this->borrarEspaciosVaciosDeArray($splitUri);
+        $this->borrarEspaciosVaciosDeArray($splitRouter);
+        $longitudUri = count($splitUri);
+        $longitudRouter = count($splitRouter);
+        if ($longitudRouter != $longitudUri) {
+            return false;
+        }
+        while ($contadorArray < $longitudUri) {
+            if ($splitRouter[$contadorArray][0] == '{') {
+                $sinLlaves = $this->quitarLlaves($splitRouter[$contadorArray]);
+                $direccionador->addParametro($sinLlaves, $splitUri[$contadorArray]);
+                echo "entre";
+            } else if (strcmp($splitUri[$contadorArray], $splitRouter[$contadorArray]) != 0) {
+                $direccionador->cleanParametros();
+                return false;
+            }
+            $contadorArray++;
+        }
+        return true;
+    }
 
-			throw new Exception404();
-			
-		}
+    public function borrarEspaciosVaciosDeArray(&$array) {
+        while (array_search("", $array) !== false) {
+            $this->buscarElementoYEliminar("", $array);
+        }
+    }
 
-		public function getController($bundle,$controlador,$metodo, $parametros = null){
-				//llamamos al metodo que incluye al controlador del bundle
-				$this->incluirControlador($bundle,$controlador);
+    public function buscarElementoYEliminar($string, &$array) {
+        $i = 0;
+        while ($i < count($array)) {
+            if ($array[$i] == $string) {
+                array_splice($array, $i, 1);
+                return;
+            }
+            $i++;
+        }
+    }
 
-				switch($controlador){
-					case "adminController":
-					case "userController": 
-						if(!Sesiones::estaLogeado()){
-							return Vista::crear(MENSAJES."error/accesoProhibido.php");
-						}
-						break;
-				}
+    public function quitarLlaves($stringConLlaves) {
+        $sinUnaLlave = str_replace("{", "", $stringConLlaves);
+        $sinDosLlaves = str_replace("}", "", $sinUnaLlave);
+        return $sinDosLlaves;
+    }
 
-				$claseTemporal = new $controlador();
-						
-						if(!empty($parametros)){
-							
-							$claseTemporal->$metodo($parametros);	
-						}
+    public function getController($bundle, $controlador, $metodo, $parametros) {
+        //llamamos al metodo que incluye al controlador del bundle
+        $this->incluirControlador($bundle, $controlador);
 
-						else{
-							
-							$claseTemporal->$metodo();	
-						}
+        switch ($controlador) {
+            case "adminController":
+            case "userController":
+                if (!Sesiones::estaLogeado()) {
+                    return Vista::crear(MENSAJES . "error/accesoProhibido.php");
+                }
+                break;
+        }
 
-		}
+        $claseTemporal = new $controlador();
 
-		public function incluirControlador($bundle,$controlador){
-			//si el archivo existe
-			$archivo = BUNDLES_RUTA.$bundle."/"."controllers"."/".$controlador.".php";
-			require_once $archivo;
-		}
-	}
+        if (!empty($parametros)) {
+
+            $claseTemporal->$metodo($parametros);
+        } else {
+
+            $claseTemporal->$metodo();
+        }
+    }
+
+    public function incluirControlador($bundle, $controlador) {
+        //si el archivo existe
+        $archivo = BUNDLES_RUTA . $bundle . "/" . "controllers" . "/" . $controlador . ".php";
+        require_once $archivo;
+    }
+
+}

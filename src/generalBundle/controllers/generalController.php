@@ -14,13 +14,11 @@
 			Vista::crear(GENERAL_BUNDLE."views/catalogo.php", "productos", $productos);
 		}
 
-		public function producto($producto){
+		public function producto($parametros){
 			require_once ADMIN_BUNDLE."model/producto.php";
-			$codigo = $producto[0];
-			print_r($producto);
-
+                        
 			$prod = new Producto();
-			$producto = $prod->buscarPorCodigo($codigo);
+			$producto = $prod->buscarPorCodigo((int)$parametros["codigo"]);
 			Vista::crear(GENERAL_BUNDLE."views/producto.php", "producto", $producto);
 		}
 

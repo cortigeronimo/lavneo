@@ -1,13 +1,8 @@
 <?php 
 
-	class Categoria extends ConexionConMysql{
+	class Rol extends MasterBD{
 
 		private $nombre;
-		CONST TABLA = "categorias";
-
-		function __contruct(){
-			$this->tabla = "categorias";
-		}
 
 		public function getNombre(){
 			return $this->nombre;
