@@ -3,7 +3,7 @@
 
 <?php ob_start() ?>
 
-	<form action="<?php assets::ruta("subirProductos"); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<form action="<?php assets::ruta("alta/producto"); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
 		<div class="campos">
 			<label>Nombre del Producto:</label>
@@ -36,10 +36,10 @@
 
 		<div class="campos">
 			<input type="submit" name="Enviar">
-		</div>
+                </div>
 
 	</form>
 
 <?php $contenido = ob_get_clean() ?>
 
-<?php include PLANTILLAS."admin.php"; ?>
+<?php include PLANTILLAS."admin.php";

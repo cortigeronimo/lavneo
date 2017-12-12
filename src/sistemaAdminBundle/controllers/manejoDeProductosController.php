@@ -47,9 +47,9 @@ class ManejoDeProductosController {
             $padre = $_POST["padre"];
             
             $repositorioCategorias = new RepositoryCategoria();
-            $categoriaPadre = "NULL";
+            $categoriaPadre = NULL;
             
-            if($padre !== "NULL"){
+            if(strcmp($padre, "NULL") != 0){
                 $categoriaPadre = $repositorioCategorias->findOneByColumn("id", $padre);
             }            
             
@@ -57,13 +57,7 @@ class ManejoDeProductosController {
             $categoria->setNombre($nombre);
             $categoria->setPadre($categoriaPadre);
             
-            if($repositorioCategorias->insert($categoria)){
-                echo "no fallo";
-            }
-            
-            else{
-                echo "fallo";
-            }
+            $repositorioCategorias->insert($categoria);
 
             return Vista::crear(GENERAL_BUNDLE . "views/index.php");
         } else {

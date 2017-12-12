@@ -19,5 +19,27 @@ class RepositoryProducto extends Repository{
             //faltaria el de productoImpuesto
             return $producto;
         }
+        
+        protected function generarValores($producto) {
+        $string = "(";
+        $string = $string . "'" . $producto->getNombre() . "'" . ", ";
+        $string = $string . "'" . $producto->getDescripcion() . "'" . ", ";
+        $string = $string . "'" . $producto->getImagen() . "'" . ", ";
+        $string = $string . "'" . $producto->getPrecioUnitario() . "'" . ", ";
+        $string = $string . "'" . $producto->getCategoria()->getId() . "'" . ", ";
+        $string = $string . ")";
+        return $string;
+    }
+
+    protected function generarColumnas() {
+        $string = "(";
+        $string = $string . "nombre" . ", ";
+        $string = $string . "descripcion" . ", ";
+        $string = $string . "imagen" . ", ";
+        $string = $string . "precio_unitario" . ", ";
+        $string = $string . "id_categoria" . ", ";
+        $string = $string . ")";
+        return $string;
+    }
 
 }

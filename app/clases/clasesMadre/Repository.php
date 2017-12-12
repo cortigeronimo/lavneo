@@ -18,10 +18,14 @@ abstract class Repository {
         $conexion = new conexion();
         $cn = $conexion->conectar();
         $query = "SELECT * FROM " . $this->tabla . " ORDER BY " . $columnaDeOrden . " ASC";
-        $resultado = $cn->query($query);
-        $rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
-        $conexion->cerrar($cn);
-        return $rows;
+        try {
+            $resultado = $cn->query($query);
+        } catch (Exception $e) {
+            throw new ExceptionBuscarElementos();
+        } finally {
+            $conexion->cerrar($cn);
+        }
+        return $this->convertAllToObject($resultado);
     }
 
     public function findAll() {
@@ -35,8 +39,7 @@ abstract class Repository {
         } finally {
             $conexion->cerrar($cn);
         }
-        $rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
-        return $this->convertAllToObject($rows);
+        return $this->convertAllToObject($resultado);
     }
 
     public function findOneByColumn($columna, $valor) {
@@ -50,15 +53,14 @@ abstract class Repository {
         } finally {
             $conexion->cerrar($cn);
         }
-        $rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
-        return $this->convertDataToObject($rows);
+        return $this->convertAllToObject($resultado);
     }
 
     public function insert($objeto) {
         $conexion = new conexion();
         $cn = $conexion->conectar();
         $query = "INSERT INTO " . $this->tabla . " " . $this->generarColumnas() . " VALUES " . $this->generarValores($objeto);
-        echo "query: " . $query;
+        echo $query;
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
@@ -122,10 +124,10 @@ abstract class Repository {
         return $resultado;
     }
     
-    protected function convertAllToObject($informacion){
+    protected function convertAllToObject($filas){
         $elementos = array();
-        foreach ($informacion as $value) {
-            $elementos[] = $this->convertDataToObject($value);
+        while($fila = $filas->fetch_array(MYSQLI_ASSOC)) {
+            $elementos[] = $this->convertDataToObject($fila);
         }
         return $elementos;
     }

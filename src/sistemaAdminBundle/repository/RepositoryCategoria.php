@@ -8,7 +8,7 @@ class RepositoryCategoria extends Repository {
 
     protected function convertDataToObject($informacion) {
         $categoria = new Categoria();
-        $categoria->setId($informacion["id"]);
+        $categoria->setId($informacion["id"]);   
         $categoria->setNombre($informacion["nombre"]);
         $categoria->setPadre($informacion["padre"]);
         return $categoria;
@@ -17,8 +17,8 @@ class RepositoryCategoria extends Repository {
     protected function generarValores($categoria) {
         $string = "(";
         $string = $string . "'" . $categoria->getNombre() . "'" . ", ";
-        if($categoria->getPadre() == "NULL"){
-            $string = $string . $categoria->getPadre();
+        if($categoria->getPadre() == NULL){
+            $string = $string . "NULL";
         }
         else{
             $string = $string . "'" . $categoria->getPadre()->getId() . "'";
