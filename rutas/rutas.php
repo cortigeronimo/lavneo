@@ -26,8 +26,10 @@
 		"/contacto" => new Direccionador("generalBundle", "generalController", "contacto"),
 
 		"/administracion" => new Direccionador("sistemaAdminBundle", "principalController", "administracion"),
+            
+                "/alta/categoria" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "altaCategoria"),
 
-		"/alta/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "subirProductos"),
+		"/alta/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "altaProducto"),
 
 		"/baja/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "eliminarProductos"),
 

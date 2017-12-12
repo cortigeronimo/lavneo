@@ -38,14 +38,9 @@ class mainController {
     public function obtenerDireccionador($uri) {
         foreach ($this->_controladores as $key => $value) {
             if ($this->matchea($uri, $key, $value)) {
-                echo "Matchee";
                 return $value;
             }
-            echo "No Matchee";
         }
-        
-        echo "No pude matchear con ninguno";
-
         throw new Exception404();
     }
 
@@ -53,11 +48,15 @@ class mainController {
         if(strcmp($uri, "/") == 0){
             return true;
         }
-        $contadorArray = 1;
+        $contadorArray = 0;
         $splitUri = explode("/", $uri);
         $splitRouter = explode("/", $router);
+        //print_r($splitUri);
+        //print_r($splitRouter);
         $this->borrarEspaciosVaciosDeArray($splitUri);
         $this->borrarEspaciosVaciosDeArray($splitRouter);
+        //print_r($splitUri);
+        //print_r($splitRouter);
         $longitudUri = count($splitUri);
         $longitudRouter = count($splitRouter);
         if ($longitudRouter != $longitudUri) {
@@ -67,7 +66,6 @@ class mainController {
             if ($splitRouter[$contadorArray][0] == '{') {
                 $sinLlaves = $this->quitarLlaves($splitRouter[$contadorArray]);
                 $direccionador->addParametro($sinLlaves, $splitUri[$contadorArray]);
-                echo "entre";
             } else if (strcmp($splitUri[$contadorArray], $splitRouter[$contadorArray]) != 0) {
                 $direccionador->cleanParametros();
                 return false;

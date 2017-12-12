@@ -54,32 +54,20 @@ abstract class Repository {
         return $this->convertDataToObject($rows);
     }
 
-    public function insert($array) {
+    public function insert($objeto) {
         $conexion = new conexion();
         $cn = $conexion->conectar();
-        $keys = array_keys($array);
-        $query = "INSERT INTO " . self::TABLA . " " . $this->generarColumnas($keys) . " VALUES " . $this->generarValores($keys, $array);
+        $query = "INSERT INTO " . $this->tabla . " " . $this->generarColumnas() . " VALUES " . $this->generarValores($objeto);
+        echo "query: " . $query;
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
             throw new ExceptionInsertarElemento();
         } finally {
+            echo $cn->error;
             $conexion->cerrar($cn);
         }
         return $resultado;
-    }
-    
-    protected function generarColumnas($keys){
-        $i = 0;
-        $longitud = count($keys);
-        $string = "(";
-        while($i < $longitud){
-            $string = $string . $keys[$i] . ",";
-            $i++;
-        }
-        $longitudString = strlen($string);
-        $string[$longitudString - 1] = ')';
-        return $string;
     }
     
     public function update($arrayConValores, $campoDeBusqueda, $valor){
@@ -105,20 +93,7 @@ abstract class Repository {
         
         return $string;
     }
-    
-    protected function generarValores($keys, $array){
-        $i = 0;
-        $longitud = count($keys);
-        $string = "(";
-        while($i < $longitud){
-            $string = $string . $array[$keys[$i]] . ",";
-            $i++;
-        }
-        $longitudString = strlen($string);
-        $string[$longitudString - 1] = ')';
-        return $string;
-    }
-    
+
     public function deleteOneByColumn($column, $value){
         $conexion = new conexion();
         $cn = $conexion->conectar();
@@ -147,8 +122,6 @@ abstract class Repository {
         return $resultado;
     }
     
-    abstract protected function convertDataToObject($informacion);
-    
     protected function convertAllToObject($informacion){
         $elementos = array();
         foreach ($informacion as $value) {
@@ -156,5 +129,11 @@ abstract class Repository {
         }
         return $elementos;
     }
+    
+    abstract protected function generarValores($valores);
 
+    abstract protected function generarColumnas();
+    
+    abstract protected function convertDataToObject($informacion);
+    
 }

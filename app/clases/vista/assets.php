@@ -7,7 +7,9 @@
 		}
 
 		public static function ruta($ruta){
-			$urlprin = str_replace("index.php","",$_SERVER["PHP_SELF"]);
-			echo trim($urlprin,"/").$ruta;
+			//$urlprin = str_replace("index.php","",$_SERVER["PHP_SELF"]);
+			//echo trim($urlprin,"/").$ruta;
+                        //cambiar al subir al servidor
+                    echo "/" . $ruta;
 		}
 	}

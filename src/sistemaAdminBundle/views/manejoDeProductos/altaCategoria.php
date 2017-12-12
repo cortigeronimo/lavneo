@@ -3,34 +3,21 @@
 
 <?php ob_start() ?>
 
-	<form action="<?php assets::ruta("subirProductos"); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<form action="<?php assets::ruta("alta/categoria"); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
 		<div class="campos">
-			<label>Nombre del Producto:</label>
+			<label>Nombre de la Categoria:</label>
 			<input type="text" name="nombre">
 		</div>
 
 		<div class="campos">
-			<label>Descripción(opcional):</label>
-			<textarea name="descripcion"></textarea>
-		</div>
-
-		<div class="campos">
-			<label>Precio(opcional):</label>
-			<input type="number" name="precio" step="any" value="">
-		</div>
-
-		<div class="campos">
-			<label>Imagen(opcional):</label>
-			<input type="file" name="archivo">
-		</div>
-
-		<div class="campos">
-			<label>Categoría:</label>
-			<select>
+			<label>Categoría padre:</label>
+			<select name="padre">
+                                <option value="NULL">No tiene padre.</option>
 				<?php foreach($categorias as $categoria){ ?>
 				<option value="<?php echo $categoria->getNombre();?>"><?php $categoria->getNombre()?></option>
 				<?php } ?>
+                                
 			</select>
 		</div>
 
