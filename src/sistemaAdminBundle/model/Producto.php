@@ -2,7 +2,6 @@
 
 	class Producto extends masterBD{
 
-		//private $codigo;
 		private $nombre;
 		private $descripcion;
 		private $precioUnitario;

@@ -1,5 +1,7 @@
 <?php 
-	
+        require_once(ADMIN_BUNDLE . "model/Producto.php");
+	require_once(ADMIN_BUNDLE . "repository/RepositoryProducto.php");
+        
 	class generalController{
 
 		public function index(){
@@ -9,16 +11,16 @@
 		public function catalogo(){
 
 			require_once ADMIN_BUNDLE."model/producto.php";
-			$producto = new Producto();
-			$productos = $producto->findAll();
+			$repositorioProducto =  new RepositoryProducto();
+			$productos = $repositorioProducto->findAll();
 			Vista::crear(GENERAL_BUNDLE."views/catalogo.php", "productos", $productos);
 		}
 
 		public function producto($parametros){
 			require_once ADMIN_BUNDLE."model/producto.php";
                         
-			$prod = new Producto();
-			$producto = $prod->buscarPorCodigo((int)$parametros["codigo"]);
+			$repositorio = new RepositoryProducto();
+			$producto = $repositorio->findOneByColumn("id", $parametros['id']);
 			Vista::crear(GENERAL_BUNDLE."views/producto.php", "producto", $producto);
 		}
 

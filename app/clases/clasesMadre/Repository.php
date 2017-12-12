@@ -1,58 +1,62 @@
 <?php
 
-class Repository {
+require_once APP_RUTA . "clases/herramientas/conexion.php";
+
+abstract class Repository {
 
     protected $tabla;
 
-    public function getTabla() {
+    protected function getTabla() {
         return $this->tabla;
     }
 
-    public function setTabla($nombre) {
+    protected function setTabla($nombre) {
         $this->tabla = $nombre;
     }
 
     public function findAllOrderely($columnaDeOrden) {
-        $cn = conexion::conectar();
+        $conexion = new conexion();
+        $cn = $conexion->conectar();
         $query = "SELECT * FROM " . $this->tabla . " ORDER BY " . $columnaDeOrden . " ASC";
         $resultado = $cn->query($query);
         $rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
-        conexion::cerrar($cn);
+        $conexion->cerrar($cn);
         return $rows;
     }
 
     public function findAll() {
-        $cn = conexion::conectar();
+        $conexion = new conexion();
+        $cn = $conexion->conectar();
         $query = "SELECT * FROM " . $this->tabla;
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
             throw new ExceptionBuscarElementos();
         } finally {
-            conexion::cerrar($cn);
+            $conexion->cerrar($cn);
         }
         $rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
-        conexion::cerrar($cn);
-        return $rows;
+        return $this->convertAllToObject($rows);
     }
 
     public function findOneByColumn($columna, $valor) {
-        $cn = conexion::conectar();
-        $query = "SELECT * FROM " . $this->tabla . " WHERE " . $columna . " = " . $valor;
+        $conexion = new conexion();
+        $cn = $conexion->conectar();
+        $query = "SELECT * FROM " . $this->tabla . " WHERE " . $columna . " = " . $valor . " LIMIT 1";
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
             throw new ExceptionBuscarElemento();
         } finally {
-            conexion::cerrar($cn);
+            $conexion->cerrar($cn);
         }
         $rows = HerramientasParaMysql::deObjetoSqlAVector($resultado);
-        conexion::cerrar($cn);
-        return $rows;
+        return $this->convertDataToObject($rows);
     }
 
     public function insert($array) {
-        $cn = conexion::conectar();
+        $conexion = new conexion();
+        $cn = $conexion->conectar();
         $keys = array_keys($array);
         $query = "INSERT INTO " . self::TABLA . " " . $this->generarColumnas($keys) . " VALUES " . $this->generarValores($keys, $array);
         try {
@@ -60,12 +64,12 @@ class Repository {
         } catch (Exception $e) {
             throw new ExceptionInsertarElemento();
         } finally {
-            conexion::cerrar($cn);
+            $conexion->cerrar($cn);
         }
         return $resultado;
     }
     
-    private function generarColumnas($keys){
+    protected function generarColumnas($keys){
         $i = 0;
         $longitud = count($keys);
         $string = "(";
@@ -78,20 +82,21 @@ class Repository {
         return $string;
     }
     
-    private function update($arrayConValores, $campoDeBusqueda, $valor){
-        $cn = conexion::conectar();
+    public function update($arrayConValores, $campoDeBusqueda, $valor){
+        $conexion = new conexion();
+        $cn = $conexion->conectar();
         $query = "UPDATE " . $this->tabla . " SET " . $this->generarValoresUpdate($arrayConValores) . " WHERE " . $campoDeBusqueda . " = " . $valor;
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
             throw new ExceptionModificarElemento();
         } finally {
-            conexion::cerrar($cn);
+            $conexion->cerrar($cn);
         }
         return $resultado;
     }
     
-    private function generarValoresUpdate($array){
+    protected function generarValoresUpdate($array){
         foreach ($array as $key => $value) {
             $string = $string . $key . " = " . $value . ",";
         }
@@ -101,7 +106,7 @@ class Repository {
         return $string;
     }
     
-    private function generarValores($keys, $array){
+    protected function generarValores($keys, $array){
         $i = 0;
         $longitud = count($keys);
         $string = "(";
@@ -114,31 +119,42 @@ class Repository {
         return $string;
     }
     
-    private function deleteOneByColumn($column, $value){
-        $cn = conexion::conectar();
+    public function deleteOneByColumn($column, $value){
+        $conexion = new conexion();
+        $cn = $conexion->conectar();
         $query = "DELETE FROM " . $this->tabla . " WHERE " . $column . " = " . $value;
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
             throw new ExceptionEliminarElemento();
         } finally {
-            conexion::cerrar($cn);
+            $conexion->cerrar($cn);
         }
-        conexion::cerrar($cn);
         return $resultado;
     }
     
-    private function deleteTable(){
-        $cn = conexion::conectar();
+    public function deleteTable(){
+        $conexion = new conexion();
+        $cn = $conexion->conectar();
         $query = "DELETE FROM " . $this->tabla;
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
             throw new ExceptionEliminarTabla();
         } finally {
-            conexion::cerrar($cn);
+            $conexion->cerrar($cn);
         }
         return $resultado;
+    }
+    
+    abstract protected function convertDataToObject($informacion);
+    
+    protected function convertAllToObject($informacion){
+        $elementos = array();
+        foreach ($informacion as $value) {
+            $elementos[] = $this->convertDataToObject($value);
+        }
+        return $elementos;
     }
 
 }

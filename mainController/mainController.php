@@ -1,13 +1,19 @@
 <?php
 
-require_once APP_RUTA . "excepciones/excepciones.php";
-require_once APP_RUTA . "clases/controlador/redireccionar.php";
-require_once APP_RUTA . "clases/vista/vista.php";
-require_once APP_RUTA . "clases/herramientas/herramientasParaMysql.php";
-require_once APP_RUTA . "clases/controlador/email.php";
-require_once APP_RUTA . "clases/vista/assets.php";
-require_once APP_RUTA . "clases/controlador/sesiones.php";
 require_once APP_RUTA . "clases/clasesMadre/masterBD.php";
+require_once APP_RUTA . "clases/clasesMadre/Repository.php";
+
+require_once APP_RUTA . "clases/controlador/email.php";
+require_once APP_RUTA . "clases/controlador/redireccionar.php";
+require_once APP_RUTA . "clases/controlador/regex.php";
+require_once APP_RUTA . "clases/controlador/sesiones.php";
+
+require_once APP_RUTA . "clases/herramientas/herramientasParaMysql.php";
+
+require_once APP_RUTA . "clases/vista/vista.php";
+require_once APP_RUTA . "clases/vista/assets.php";
+
+require_once APP_RUTA . "excepciones/excepciones.php";
 require_once RUTA . "rutas.php";
 
 class mainController {
@@ -32,9 +38,13 @@ class mainController {
     public function obtenerDireccionador($uri) {
         foreach ($this->_controladores as $key => $value) {
             if ($this->matchea($uri, $key, $value)) {
+                echo "Matchee";
                 return $value;
             }
+            echo "No Matchee";
         }
+        
+        echo "No pude matchear con ninguno";
 
         throw new Exception404();
     }
