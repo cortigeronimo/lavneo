@@ -9,7 +9,7 @@ class ManipuladorDeImagenes {
             // Undefined | Multiple Files | $_FILES Corruption Attack
             // If this request falls under any of them, treat it invalid.
             if (!isset($file['error']) || is_array($file['error'])) {
-                throw new RuntimeException('Invalid parameters.');
+                throw new ExceptionImagenNoReparable("Error en los parametros.");
             }
 
             // Check $_FILES['upfile']['error'] value.
@@ -17,17 +17,17 @@ class ManipuladorDeImagenes {
                 case UPLOAD_ERR_OK:
                     break;
                 case UPLOAD_ERR_NO_FILE:
-                    throw new RuntimeException('No file sent.');
+                    throw new ExceptionImagenReparable("No hay archivo.");
                 case UPLOAD_ERR_INI_SIZE:
                 case UPLOAD_ERR_FORM_SIZE:
-                    throw new RuntimeException('Exceeded filesize limit.');
+                    throw new ExceptionImagenNoReparable("Archivo muy grande.");
                 default:
-                    throw new RuntimeException('Unknown errors.');
+                    throw new ExceptionImagenNoReparable("Error no esperado.");
             }
 
             // You should also check filesize here. 
             if ($file['size'] > 20971520) {
-                throw new RuntimeException('Exceeded filesize limit.');
+                throw new ExceptionImagenNoReparable("Archivo muy grande.");
             }
 
             // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
@@ -36,12 +36,15 @@ class ManipuladorDeImagenes {
             $tipos = array('jpg' => 'image/jpeg', 'png' => 'image/png');
             $ext = array_search( $finfo->file($file['tmp_name']), $tipos, true);
             if (false === $ext) {
-                throw new RuntimeException('Invalid file format.');
+                throw new ExceptionImagenNoReparable("Formato de archivo no admitido.");
             }
 
             $ruta = "imagenes/productos/" . $file['name'];
-            if (!move_uploaded_file($file['tmp_name'], $ruta)) {
-                throw new RuntimeException('Failed to move uploaded file.');
+            if(file_exists($ruta)){
+                return $ruta;
+            }
+            if (!move_uploaded_file($file['tmp_name'], ASSETS_RUTA . $ruta)) {
+                throw new ExceptionImagenNoReparable("No se pudo mover el archivo.");
             }
             
             return $ruta;

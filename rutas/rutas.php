@@ -35,7 +35,7 @@
             
                 "/baja/producto/{id}" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "bajaProducto"),
 
-		"/modificacion/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "modificarProductos"),
+		"/modificacion/producto/{id}" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "modificarProducto"),
 
 		"/producto/{codigo}" => new Direccionador("generalBundle", "generalController", "producto"),
 

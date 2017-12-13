@@ -2,35 +2,25 @@
 <link rel="stylesheet" type="text/css" href="<?php assets::asset("css/Admin/modificarProductos/modificarProductos.css"); ?>">
 
 <?php ob_start() ?>
-
-	<div class="productos">
-
-		<?php foreach($productos as $producto){?>
-		<div class="producto">
-
-			<div class="img">
-				<?php if($producto['imagen'] != ""){ ?>
-
-				<img src="<?php assets::asset("imagenes/productos/".$producto['imagen']); ?>" alt="<?php echo $producto['nombre']; ?>">
-
-				<?php } else{ ?>
-
-				<img src="<?php assets::asset("imagenes/productos/no-disponible.png"); ?>" alt="no-disponible">
-
-				<?php } ?>
-			</div>
-
-			<div class="contenido-producto">
-				<h2>Código de producto: <a href="<?php assets::ruta('modificarProducto/'.str_replace(" ","-",$producto['nombre'])); ?>" title="">#<?php echo $producto['codigo']; ?></a></h2>
-				<h3><?php echo $producto['nombre'];?></h3>
-				<p><?php echo $producto['descripcion'];?></p>
-			</div>
-
-		</div>
-		<?php } ?>
-
-	</div>
-
+<?php $categorias = $array["categorias"]; $producto = $array["producto"]; ?>
+<form action="<?php assets::form("modificacion/producto/" . $producto->getId()); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    <h2>ID: <?php echo $producto->getId(); ?></h2>
+    <p>Nombre: <input name="nombre" type="text" value="<?php echo $producto->getNombre(); ?>"></p>
+    <p>Descripcion: <input name="descripcion" type="text" value="<?php echo $producto->getDescripcion(); ?>"></p>
+    <img src="<?php assets::asset($producto->getImagen()); ?>" alt="<?php echo $producto->getNombre(); ?>" height="42" width="42"><br>
+    <p>Imagen: <input type="file" name="file"></p>
+    <p>Precio unitario (sin iva, ni otros impuestos): <input name="precioUnitario" type="text" value="<?php echo $producto->getPrecioUnitario(); ?>"></p>
+    <select name="categoria">        
+        <?php foreach ($categorias as $categoria) { ?>
+            <?php if($categoria->getId() == $producto->getCategoria()->getId()){?>
+            <option value="<?php echo $categoria->getId(); ?>" selected><?php echo $categoria->getNombre(); ?></option>
+            <?php } else{ ?>
+            <option value="<?php echo $categoria->getId(); ?>"><?php echo $categoria->getNombre(); ?></option>
+            <?php } ?>
+        <?php } ?>
+    </select>
+    <p><input type="submit" value="Enviar"></p>
+</form>
 <?php $contenido = ob_get_clean() ?>
 
-<?php include PLANTILLAS."admin.php"; ?>
+<?php include PLANTILLAS . "admin.php";

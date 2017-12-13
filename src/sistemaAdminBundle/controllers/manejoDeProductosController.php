@@ -78,10 +78,34 @@ class ManejoDeProductosController {
         Redireccionar::redireccionarARuta("administracion");
     }
 
-    public function modificarProductos($parametros) {
-        $repositorioProductos = new RepositoryProducto();
-        $producto = $repositorioProductos->findOneByColumn("id", $parametros["id"]);
-        return Vista::crear(ADMIN_BUNDLE . "views/modificarProductos.php", "producto", $producto);
+    public function modificarProducto($parametros) {
+        
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            require_once APP_RUTA . "clases/herramientas/ManipuladorDeImagenes.php";
+            $repositorioProducto = new RepositoryProducto();
+            $producto = $repositorioProducto->findOneByColumn("id", $parametros['id']);
+            $producto->setNombre($_POST["nombre"]);
+            $producto->setDescripcion($_POST["descripcion"]);
+            $manipulador = new ManipuladorDeImagenes();
+            if($_FILES["file"]["size"] > 0) {
+                $ruta = $manipulador->guardar($_FILES['file']);
+                $producto->setImagen($ruta);
+            }
+            $producto->setPrecioUnitario($_POST["precioUnitario"]);
+            $categoria = new Categoria();
+            $categoria->setId($_POST["categoria"]);
+            $producto->setCategoria($categoria);
+            $repositorioProducto->update($producto);
+            Redireccionar::redireccionarARuta("administracion");
+        }
+        else{
+            $repositorioProductos = new RepositoryProducto();
+            $repositorioCategorias = new RepositoryCategoria();
+            $categorias = $repositorioCategorias->findAllOrderely("nombre");
+            $producto = $repositorioProductos->findOneByColumn("id", $parametros["id"]);
+            $array = array("categorias" => $categorias, "producto" => $producto);
+            return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/modificarProductos.php", "array", $array);
+        }
     }
 
 }

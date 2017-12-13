@@ -73,28 +73,20 @@ abstract class Repository {
         return $resultado;
     }
     
-    public function update($arrayConValores, $campoDeBusqueda, $valor){
+    public function update($objeto){
         $conexion = new conexion();
         $cn = $conexion->conectar();
-        $query = "UPDATE " . $this->tabla . " SET " . $this->generarValoresUpdate($arrayConValores) . " WHERE " . $campoDeBusqueda . " = " . $valor;
+        $query = "UPDATE " . $this->tabla . " SET " . $this->generarValoresUpdate($objeto) . " WHERE id " . " = " . $objeto->getId();
+        echo $query;
         try {
             $resultado = $cn->query($query);
         } catch (Exception $e) {
             throw new ExceptionModificarElemento();
         } finally {
+            echo $cn->error;
             $conexion->cerrar($cn);
         }
         return $resultado;
-    }
-    
-    protected function generarValoresUpdate($array){
-        foreach ($array as $key => $value) {
-            $string = $string . $key . " = " . $value . ",";
-        }
-        $longitud = strlen($string);
-        $string[$longitud - 1] = '\0';
-        
-        return $string;
     }
 
     public function deleteOneByColumn($column, $value){
@@ -133,7 +125,9 @@ abstract class Repository {
         return $elementos;
     }
     
-    abstract protected function generarValores($valores);
+    abstract protected function generarValores($objeto);
+    
+    abstract protected function generarValoresUpdate($objeto);
 
     abstract protected function generarColumnas();
     

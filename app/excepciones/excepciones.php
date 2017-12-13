@@ -7,3 +7,5 @@
         class ExceptionBuscarElementos extends Exception{}
         class ExceptionEliminarElemento extends Exception{}
         class ExceptionEliminarTabla extends Exception{}
+        class ExceptionImagenReparable extends Exception{}
+        class ExceptionImagenNoReparable extends Exception{}
