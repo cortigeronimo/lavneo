@@ -2,6 +2,7 @@
 
 	class Redireccionar{
 		public static function redireccionarARuta($ruta){
-			header('Location: '.$ruta.'');
+                        $rutaARedireccionar = "http://" . $_SERVER["SERVER_NAME"] . "/" . $ruta;
+			header('Location: '.$rutaARedireccionar);
 		}
 	}

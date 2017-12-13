@@ -39,7 +39,7 @@ class ManipuladorDeImagenes {
                 throw new RuntimeException('Invalid file format.');
             }
 
-            $ruta = ASSETS_RUTA . "imagenes/productos/" . $file['name'];
+            $ruta = "imagenes/productos/" . $file['name'];
             if (!move_uploaded_file($file['tmp_name'], $ruta)) {
                 throw new RuntimeException('Failed to move uploaded file.');
             }
@@ -48,7 +48,7 @@ class ManipuladorDeImagenes {
 
         } catch (RuntimeException $e) {
             echo $e->getMessage();
-            return APP_RUTA . "imagenes/productos/no-disponible.png";
+            return "imagenes/productos/no-disponible.png";
         }
     }
 

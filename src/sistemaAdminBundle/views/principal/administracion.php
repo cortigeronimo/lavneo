@@ -7,8 +7,7 @@
 		<ul>
                         <li><a href="<?php assets::ruta("alta/categoria"); ?>" title="">Añadir Categoria</a></li>
 			<li><a href="<?php assets::ruta("alta/producto"); ?>" title="">Subír Productos.</a></li>
-			<li><a href="<?php assets::ruta("modificar-productos"); ?>" title="">Modificar Productos.</a></li>
-			<li><a href="<?php assets::ruta("eliminar-productos"); ?>" title="">Eliminar Productos.</a></li>
+			<li><a href="<?php assets::ruta("accion/productos"); ?>" title="">Modificar o Eliminar Productos.</a></li>
 		</ul>
 	</div>
 

@@ -30,7 +30,7 @@ class ManejoDeProductosController {
             $repositorioProducto = new RepositoryProducto();
             $repositorioProducto->insert($producto);
 
-            return Vista::crear(ADMIN_BUNDLE . "views/principal/administracion.php");
+            Redireccionar::redireccionarARuta("administracion");
         } else {
             $repositorioCategorias = new RepositoryCategoria();
             $categorias = $repositorioCategorias->findAllOrderely("nombre");
@@ -57,7 +57,7 @@ class ManejoDeProductosController {
             
             $repositorioCategorias->insert($categoria);
             
-            return Vista::crear(GENERAL_BUNDLE . "views/index.php");
+            Redireccionar::redireccionarARuta("administracion");
         } else {
             $repositorioCategorias = new RepositoryCategoria();
             $categorias = $repositorioCategorias->findAllOrderely("nombre");
@@ -65,14 +65,23 @@ class ManejoDeProductosController {
         }
     }
 
-    public function eliminarProductos() {
-        return Vista::crear(ADMIN_BUNDLE . "views/eliminarProductos.php");
+    public function accionSobreProductos() {
+        $repositorioProductos = new RepositoryProducto();
+        $productos = $repositorioProductos->findAllOrderely("nombre");
+        return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/verProductosParaModificarlosOEliminarlos.php", "productos", $productos);
+    }
+    
+    public function bajaProducto($parametros){
+        $repositorioProductos = new RepositoryProducto();
+        $repositorioProductos->deleteOneByColumn("id", $parametros['id']);
+        
+        Redireccionar::redireccionarARuta("administracion");
     }
 
-    public function modificarProductos() {
-        $producto = new Producto();
-        $productos = $producto->buscarTodos();
-        return Vista::crear(ADMIN_BUNDLE . "views/modificarProductos.php", "productos", $productos);
+    public function modificarProductos($parametros) {
+        $repositorioProductos = new RepositoryProducto();
+        $producto = $repositorioProductos->findOneByColumn("id", $parametros["id"]);
+        return Vista::crear(ADMIN_BUNDLE . "views/modificarProductos.php", "producto", $producto);
     }
 
 }
