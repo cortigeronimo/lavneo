@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 10-12-2017 a las 20:47:52
+-- Tiempo de generación: 13-12-2017 a las 03:30:20
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.0.25
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(150) NOT NULL,
+  `nombre` varchar(250) NOT NULL,
   `padre` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -257,6 +257,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `datos_personales`
 --
 ALTER TABLE `datos_personales`
@@ -319,6 +325,12 @@ ALTER TABLE `users`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD CONSTRAINT `categorias_ibfk_1` FOREIGN KEY (`padre`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `items`

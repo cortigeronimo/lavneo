@@ -58,7 +58,7 @@ class ManejoDeProductosController {
             $categoria->setPadre($categoriaPadre);
             
             $repositorioCategorias->insert($categoria);
-
+            
             return Vista::crear(GENERAL_BUNDLE . "views/index.php");
         } else {
             $repositorioCategorias = new RepositoryCategoria();

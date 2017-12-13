@@ -25,8 +25,8 @@ class RepositoryProducto extends Repository{
         $string = $string . "'" . $producto->getNombre() . "'" . ", ";
         $string = $string . "'" . $producto->getDescripcion() . "'" . ", ";
         $string = $string . "'" . $producto->getImagen() . "'" . ", ";
-        $string = $string . "'" . $producto->getPrecioUnitario() . "'" . ", ";
-        $string = $string . "'" . $producto->getCategoria()->getId() . "'" . ", ";
+        $string = $string . $producto->getPrecioUnitario() . ", ";
+        $string = $string . $producto->getCategoria()->getId() . ", ";
         $string = $string . ")";
         return $string;
     }

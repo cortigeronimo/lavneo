@@ -21,7 +21,7 @@ class RepositoryCategoria extends Repository {
             $string = $string . "NULL";
         }
         else{
-            $string = $string . "'" . $categoria->getPadre()->getId() . "'";
+            $string = $string . $categoria->getPadre()->getId();
         }
         $string = $string . ")";
         return $string;
