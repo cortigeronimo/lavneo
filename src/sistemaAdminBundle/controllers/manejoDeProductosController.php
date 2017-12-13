@@ -4,35 +4,34 @@ require_once ADMIN_BUNDLE . "model/Producto.php";
 require_once ADMIN_BUNDLE . "model/categoria.php";
 
 require_once ADMIN_BUNDLE . "repository/RepositoryCategoria.php";
+require_once ADMIN_BUNDLE . "repository/RepositoryProducto.php";
 
 class ManejoDeProductosController {
 
     public function altaProducto() {
         
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $nombre = $_POST["nombre"];
-            $descripcion = $_POST["descripcion"];
-            $precio = $_POST["precio"];
-            $ruta = "";
             //luego hacer una funcion que pregunte si ya existe ese numero
-            if ((isset($_FILES['archivo'])) && ($_FILES['archivo'] != '')) {
-                $temName = $_FILES['archivo']['tmp_name']; //Obtenemos el directorio temporal en donde se ha almacenado el archivo;
-                $ruta = ASSETS_RUTA . "imagenes/productos/" . $_FILES['archivo']['name']; //donde guardo el archivo
-                $resultado = @move_uploaded_file($temName, $ruta);
-                $ruta = $_FILES['archivo']['name'];
+            $ruta = APP_RUTA . "imagenes/productos/no-disponible.png";
+            if ((isset($_FILES['file'])) && ($_FILES['file'] != '')) {
+                require_once APP_RUTA . "/clases/herramientas/ManipuladorDeImagenes.php";
+                $manipulador = new ManipuladorDeImagenes();
+                $ruta = $manipulador->guardar($_FILES['file']);
             }
-            $categoria = new Categoria();
             $producto = new Producto();
-            $categoria->setProducto($producto);
-            $producto->setCategoria($categoria);
-
-            $producto->setNombre($nombre);
-            $producto->setDescripcion($descripcion);
-            $producto->setPrecio($precio);
+            $producto->setNombre($_POST["nombre"]);
+            $producto->setDescripcion($_POST["descripcion"]);
+            $producto->setPrecioUnitario($_POST["precio"]);
             $producto->setImagen($ruta);
+            
+            $repositorioCategorias = new RepositoryCategoria();
+            $categoria = $repositorioCategorias->findOneByColumn("id", $_POST["categoria"]);
             $producto->setCategoria($categoria);
+            
+            $repositorioProducto = new RepositoryProducto();
+            $repositorioProducto->insert($producto);
 
-            return Vista::crear(MENSAJES . "exito/procesadoConExito.php");
+            return Vista::crear(ADMIN_BUNDLE . "views/principal/administracion.php");
         } else {
             $repositorioCategorias = new RepositoryCategoria();
             $categorias = $repositorioCategorias->findAllOrderely("nombre");

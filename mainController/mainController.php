@@ -8,8 +8,6 @@ require_once APP_RUTA . "clases/controlador/redireccionar.php";
 require_once APP_RUTA . "clases/controlador/regex.php";
 require_once APP_RUTA . "clases/controlador/sesiones.php";
 
-require_once APP_RUTA . "clases/herramientas/herramientasParaMysql.php";
-
 require_once APP_RUTA . "clases/vista/vista.php";
 require_once APP_RUTA . "clases/vista/assets.php";
 

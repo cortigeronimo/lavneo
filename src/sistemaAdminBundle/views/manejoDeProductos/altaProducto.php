@@ -3,7 +3,7 @@
 
 <?php ob_start() ?>
 
-	<form action="<?php assets::ruta("alta/producto"); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<form action="<?php assets::form("alta/producto"); ?>" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 
 		<div class="campos">
 			<label>Nombre del Producto:</label>
@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="campos">
-			<label>Descripción(opcional):</label>
+			<label>Descripción:</label>
 			<textarea name="descripcion"></textarea>
 		</div>
 
@@ -22,14 +22,14 @@
 
 		<div class="campos">
 			<label>Imagen(opcional):</label>
-			<input type="file" name="archivo">
+			<input type="file" name="file">
 		</div>
 
 		<div class="campos">
 			<label>Categoría:</label>
-			<select>
+			<select name="categoria">
 				<?php foreach($categorias as $categoria){ ?>
-				<option value="<?php echo $categoria->getNombre();?>"><?php $categoria->getNombre()?></option>
+				<option value="<?php echo $categoria->getId();?>"><?php echo $categoria->getNombre()?></option>
 				<?php } ?>
 			</select>
 		</div>
