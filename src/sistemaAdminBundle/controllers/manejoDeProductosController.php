@@ -12,7 +12,6 @@ class ManejoDeProductosController {
         
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //luego hacer una funcion que pregunte si ya existe ese numero
-            $ruta = APP_RUTA . "imagenes/productos/no-disponible.png";
             if ((isset($_FILES['file'])) && ($_FILES['file'] != '')) {
                 require_once APP_RUTA . "/clases/herramientas/ManipuladorDeImagenes.php";
                 $manipulador = new ManipuladorDeImagenes();

@@ -48,6 +48,7 @@ class ManipuladorDeImagenes {
 
         } catch (RuntimeException $e) {
             echo $e->getMessage();
+            return APP_RUTA . "imagenes/productos/no-disponible.png";
         }
     }
 
