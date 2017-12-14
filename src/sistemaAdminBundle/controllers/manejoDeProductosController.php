@@ -83,6 +83,13 @@ class ManejoDeProductosController {
         
         Redireccionar::redireccionarARuta("administracion");
     }
+    
+    public function bajaCategoria($parametros){
+        $repositorioCategoria = new RepositoryCategoria();
+        $repositorioCategoria->deleteOneByColumn("id", $parametros['id']);
+        
+        Redireccionar::redireccionarARuta("administracion");
+    }
 
     public function modificarProducto($parametros) {
         
