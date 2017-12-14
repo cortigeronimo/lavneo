@@ -5,12 +5,19 @@ class RepositoryCategoria extends Repository {
     function __construct() {
         $this->tabla = "categorias";
     }
-
+    
+    //posible recursividad
     protected function convertDataToObject($informacion) {
         $categoria = new Categoria();
         $categoria->setId($informacion["id"]);   
         $categoria->setNombre($informacion["nombre"]);
-        $categoria->setPadre($informacion["padre"]);
+        $repositorioCategorias = new RepositoryCategoria();
+        if($informacion["padre"] == "NULL"){
+            $categoria->setPadre(NULL);
+            return $categoria;
+        }
+        $categoriaPadre = $repositorioCategorias->findOneByColumn("id", $informacion["padre"]);
+        $categoria->setPadre($categoriaPadre);
         return $categoria;
     }
 
@@ -47,6 +54,10 @@ class RepositoryCategoria extends Repository {
         $string = $string . "padre";
         $string = $string . ")";
         return $string;
+    }
+    
+    public function interconectarCategorias(){
+        
     }
 
 }

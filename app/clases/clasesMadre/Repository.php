@@ -53,8 +53,14 @@ abstract class Repository {
         } finally {
             $conexion->cerrar($cn);
         }
-        $fila = $resultado->fetch_array(MYSQLI_ASSOC);
-        return $this->convertDataToObject($fila);
+        if($resultado){
+            $fila = $resultado->fetch_array(MYSQLI_ASSOC);
+            return $this->convertDataToObject($fila);
+        }
+        else{
+            return NULL;
+        }
+        
     }
 
     public function insert($objeto) {

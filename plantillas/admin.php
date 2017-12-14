@@ -15,7 +15,7 @@
 	<header>
 		<nav>
 			<ul>
-				<li><a href="<?php assets::ruta("administracion"); ?>" title="">Administración</a></li><li><a href="<?php assets::ruta("cerrar-sesion-admin"); ?>" title="">Cerrar Sesión</a></li>
+				<li><a href="<?php assets::form("administracion"); ?>" title="">Administración</a></li><li><a href="<?php assets::form("sesion/cerrar"); ?>" title="">Cerrar Sesión</a></li>
 			</ul>
 		</nav>	
 	</header>

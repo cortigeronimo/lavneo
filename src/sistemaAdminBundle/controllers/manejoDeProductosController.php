@@ -71,6 +71,12 @@ class ManejoDeProductosController {
         return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/verProductosParaModificarlosOEliminarlos.php", "productos", $productos);
     }
     
+    public function accionSobreCategorias(){
+        $repositorioCategorias = new RepositoryCategoria();
+        $categorias = $repositorioCategorias->findAllOrderely("nombre");
+        return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/verCategoriasParaModificarlasOEliminarlas.php", "categorias", $categorias);
+    }
+    
     public function bajaProducto($parametros){
         $repositorioProductos = new RepositoryProducto();
         $repositorioProductos->deleteOneByColumn("id", $parametros['id']);
