@@ -7,14 +7,14 @@
     <h2>ID: <?php echo $categoria->getId(); ?></h2>
     <p>Nombre: <input name="nombre" type="text" value="<?php echo $categoria->getNombre(); ?>"></p>
     <p>Padre:</p>
-    <select name="categoria">        
-        <?php foreach ($categorias as $categ) { ?>
-            <?php if(!$categ->tienePadre()){?>
+    <select name="categoria">
+        <?php if(!$categoria->tienePadre()){?>
             <option value="NULL" selected>Sin padre</option>
-            <?php }if ($categ->getId() == $categoria->getPadre()->getId()){ ?>
-            <option value="<?php echo $categ->getId(); ?>" selected><?php echo $categ->getNombre(); ?></option>
-            <?php } else{ ?>
-            <option value="<?php echo $categ->getId(); ?>"><?php echo $categ->getNombre(); ?></option>
+        <?php } else { ?>
+            <option value="<?php echo $categoria->getPadre()->getId(); ?>" selected><?php echo $categoria->getPadre()->getNombre(); ?></option>
+        <?php } foreach ($categorias as $categ) { ?>
+            <?php if($categ->getId() != $categoria->getId()){ ?>
+                <option value="<?php echo $categ->getId(); ?>"><?php echo $categ->getNombre(); ?></option>
             <?php } ?>
         <?php } ?>
     </select>
