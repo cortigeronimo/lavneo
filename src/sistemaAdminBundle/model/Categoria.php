@@ -9,6 +9,10 @@
                 public function getProductos() {
                     return $this->productos;
                 }
+                
+                public function tienePadre(){
+                    return $this->padre != NULL;
+                }
 
                 public function setProductos($productos) {
                     $this->productos = $productos;

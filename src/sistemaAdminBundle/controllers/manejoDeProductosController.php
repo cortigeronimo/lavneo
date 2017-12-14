@@ -90,6 +90,29 @@ class ManejoDeProductosController {
         
         Redireccionar::redireccionarARuta("administracion");
     }
+    
+    public function modificarCategoria($parametros) {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $repositorioCategoria = new RepositoryCategoria();
+            $categoria = $repositorioCategoria->findOneByColumn("id", $parametros["id"]);
+            $categoria->setNombre($_POST["nombre"]);
+            if($_POST["padre"] == "NULL"){
+                $nuevaCategoriaPadre = NULL;
+            }
+            else{
+                $nuevaCategoriaPadre = $repositorioCategoria->findOneByColumn("id", $_POST["categoria"]);
+            }
+            $categoria->setPadre($nuevaCategoriaPadre);
+            $repositorioCategoria->update($categoria);
+            Redireccionar::redireccionarARuta("administracion");
+        } else {
+            $repositorioCategoria = new RepositoryCategoria();
+            $categoria = $repositorioCategoria->findOneByColumn("id", $parametros["id"]);
+            $categorias = $repositorioCategoria->findAllOrderely("nombre");
+            $array = array("categorias" => $categorias, "categoria" => $categoria);
+            return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/modificarCategoria.php", "array", $array);
+        }
+    }
 
     public function modificarProducto($parametros) {
         
@@ -117,7 +140,7 @@ class ManejoDeProductosController {
             $categorias = $repositorioCategorias->findAllOrderely("nombre");
             $producto = $repositorioProductos->findOneByColumn("id", $parametros["id"]);
             $array = array("categorias" => $categorias, "producto" => $producto);
-            return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/modificarProductos.php", "array", $array);
+            return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/modificarProducto.php", "array", $array);
         }
     }
 
