@@ -17,6 +17,12 @@
 			<li><a href="<?php assets::ruta("alta/producto"); ?>" title="">Subír Productos.</a></li>
 			<li><a href="<?php assets::ruta("accion/productos"); ?>" title="">Modificar o Eliminar Productos.</a></li>
 		</ul>
+            
+            <h2>Operaciones con Impuestos y Descuentos:</h2>
+		<ul>
+			<li><a href="<?php assets::ruta("alta/impuesto-beneficio"); ?>" title="">Crear Impuesto o Descuento.</a></li>
+			<li><a href="<?php assets::ruta("accion/productos"); ?>" title="">.</a></li>
+		</ul>
 	</div>
 
 <?php $contenido = ob_get_clean() ?>

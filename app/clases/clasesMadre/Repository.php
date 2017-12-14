@@ -9,9 +9,17 @@ abstract class Repository {
     protected function getTabla() {
         return $this->tabla;
     }
+    
+    public function boolToString($bool){
+        return ($bool? 'TRUE': 'FALSE');
+    }
 
     protected function setTabla($nombre) {
         $this->tabla = $nombre;
+    }
+    
+    public function isNullString($string){
+        return $string == "NULL";
     }
 
     public function findAllOrderely($columnaDeOrden) {

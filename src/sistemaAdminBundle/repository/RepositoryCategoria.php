@@ -55,9 +55,5 @@ class RepositoryCategoria extends Repository {
         $string = $string . ")";
         return $string;
     }
-    
-    public function interconectarCategorias(){
-        
-    }
 
 }

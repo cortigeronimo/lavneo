@@ -1,10 +1,12 @@
 <?php
 
 require_once ADMIN_BUNDLE . "model/Producto.php";
-require_once ADMIN_BUNDLE . "model/categoria.php";
+require_once ADMIN_BUNDLE . "model/Categoria.php";
+require_once ADMIN_BUNDLE . "model/ImpuestoBeneficio.php";
 
 require_once ADMIN_BUNDLE . "repository/RepositoryCategoria.php";
 require_once ADMIN_BUNDLE . "repository/RepositoryProducto.php";
+require_once ADMIN_BUNDLE . "repository/RepositoryImpuestoBeneficio.php";
 
 class ManejoDeProductosController {
 
@@ -142,6 +144,33 @@ class ManejoDeProductosController {
             $array = array("categorias" => $categorias, "producto" => $producto);
             return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/modificarProducto.php", "array", $array);
         }
+    }
+    
+    public function altaImpuestoBeneficio(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $impuestoBeneficio = new ImpuestoBeneficio();
+            $impuestoBeneficio->setNombre($_POST["nombre"]);
+            if($_POST["tipo"] == "fijo"){
+                $impuestoBeneficio->setFijo($_POST["valor"]);
+            }
+            else if($_POST["tipo"] == "porcentaje"){
+                $impuestoBeneficio->setPorcentaje($_POST["valor"]);
+            }
+            if($_POST["impuestoOBeneficio"] == "impuesto"){
+                $impuestoBeneficio->getImpuestoOBeneficio(true);
+            }
+            else if($_POST["impuestoOBeneficio"] == "beneficio"){
+                $impuestoBeneficio->getImpuestoOBeneficio(false);
+            }
+            
+            $repositorioImpuestoBeneficio = new RepositoryImpuestoBeneficio();
+            $repositorioImpuestoBeneficio->insert($impuestoBeneficio);
+            
+            Redireccionar::redireccionarARuta("administracion");
+            
+            
+        }
+        return Vista::crear(ADMIN_BUNDLE . "views/manejoDeProductos/altaImpuestoBeneficio.php");
     }
 
 }

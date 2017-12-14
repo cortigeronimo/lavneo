@@ -30,7 +30,9 @@
                 "/alta/categoria" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "altaCategoria"),
 
 		"/alta/producto" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "altaProducto"),
-
+                
+                "/alta/impuesto-beneficio" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "altaImpuestoBeneficio"),
+            
 		"/accion/productos" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "accionSobreProductos"),
             
                 "/accion/categorias" => new Direccionador("sistemaAdminBundle", "manejoDeProductosController", "accionSobreCategorias"),
